@@ -1,4 +1,3 @@
-import React from 'react'
 import { Box, Container, Flex, Heading, Stack, } from '@chakra-ui/react'
 import BannerImage from '../../assets/images/banner.svg'
 
@@ -13,7 +12,7 @@ const Banner = () => {
                     </Box>
                 </Flex>
                 <Box flex="0 0 45%" pt={{ base: "20", lg: '0' }}>
-                    <img src={BannerImage} />
+                    <img src={BannerImage} alt=''/>
                 </Box>
             </Stack>
         </Container>

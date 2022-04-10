@@ -1,4 +1,4 @@
-import { Box, Container, Stack, Text } from '@chakra-ui/react'
+import { Container, Stack, Text } from '@chakra-ui/react'
 import React from 'react'
 import NavBarItems from '../home/NavBarItems'
 import { Divider } from '@chakra-ui/react'

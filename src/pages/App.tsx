@@ -1,11 +1,9 @@
-import React from 'react'
-import Banner from '../components/home/Banner';
-import HeaderMenu from '../components/home/Header'
+import Home from "./home/Home";
+
 function App() {
   return (
     <>
-    <HeaderMenu />
-    <Banner/>
+    <Home></Home>
     </>
   );
   
