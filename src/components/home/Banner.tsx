@@ -1,10 +1,9 @@
-import { Box, Container, Flex, Heading, Stack, } from '@chakra-ui/react'
+import { Box, Flex, Heading, Stack, } from '@chakra-ui/react'
 import BannerImage from '../../assets/images/banner.svg'
 
 const Banner = () => {
     return (
-        <Container maxW="container.xl" py="24" px="10">
-            <Stack alignItems="center" justifyItems="center" justifyContent="space-between">
+            <Stack alignItems="center" justifyItems="center" justifyContent="space-between" py="24" px="10">
                 <Flex alignItems='center' textAlign='center' flex="0 0 50%" py="30px">
                     <Box>
                         <Heading  fontSize='50'  color='black' fontWeight="bold">Um novo conceito de </Heading>
@@ -15,7 +14,6 @@ const Banner = () => {
                     <img src={BannerImage} alt=''/>
                 </Box>
             </Stack>
-        </Container>
 
     )
 }
