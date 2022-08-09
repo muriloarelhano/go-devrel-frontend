@@ -2,11 +2,18 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './pages/App'
 import reportWebVitals from './reportWebVitals'
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 
+const theme = extendTheme( {
+  fonts: {
+      body: 'Inter',
+      heading: 'Inter',
+      mono: 'Inter', }
+  }
+)
 ReactDOM.render(
   <React.StrictMode>
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <App />
     </ChakraProvider>
   </React.StrictMode>,

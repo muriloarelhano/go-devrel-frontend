@@ -1,9 +1,12 @@
-import { Button, Stack } from '@chakra-ui/react'
+import { Button, Stack, useDisclosure } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 import React from 'react'
+import ModalForm from '../ModalForm/ModalForm'
 
 
 const NavBarItems: React.FunctionComponent = () => {
+    
+    const { isOpen, onOpen, onClose } = useDisclosure();
 
 
     return (
@@ -27,7 +30,9 @@ const NavBarItems: React.FunctionComponent = () => {
 
             <Link to='/wiki'>Wiki</Link>
 
-            <Button variant="solid"  colorScheme='purple'>Entrar</Button>
+            <Button variant="solid" onClick={onOpen}  colorScheme='teal'>Entrar</Button>
+
+            <ModalForm onClose={onClose } isOpen={isOpen} ></ModalForm>
 
         </Stack >
 
