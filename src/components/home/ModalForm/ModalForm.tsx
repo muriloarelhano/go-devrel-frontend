@@ -15,30 +15,27 @@ const LoginModal: VFC<Props> = memo((props) => {
 
   return (
     <>
-
       <Modal
         isOpen={isOpen}
         onClose={onClose}
       >
         <ModalOverlay />
         <ModalContent >
-          <Tabs>
+          <Tabs isFitted>
             <TabList justifyContent='space-evenly'>
-              <Tab  width='full'  py='4' >Entrar</Tab>
-              <Tab width='full'  py='4' color='gray.600' > Cadastrar Conta</Tab>
+              <Tab py='4' >Entrar</Tab>
+              <Tab  py='4' color='gray.600' >Cadastrar conta</Tab>
             </TabList>
-
             <TabPanels >
-              <TabPanel  px='12' py='8'>
-               <LoginContent/>
+              <TabPanel px='12' py='8'>
+                <LoginContent />
               </TabPanel>
-              <TabPanel  px='12' py='8'>
-                <SignInContent/>
+              <TabPanel px='12' py='8'>
+                <SignInContent />
               </TabPanel>
 
             </TabPanels>
           </Tabs>
-
         </ModalContent>
       </Modal>
     </>

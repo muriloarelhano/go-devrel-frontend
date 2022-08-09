@@ -1,7 +1,6 @@
-import { Container, Text } from '@chakra-ui/react';
+import { Container } from '@chakra-ui/react';
 import Footer from '../components/home/Footer';
 import HeaderMenu from '../components/home/Header/Header'
-import SignUpCallToAction from '../components/home/SignUpCallToAction';
 
 
 function Model() {
@@ -9,7 +8,6 @@ function Model() {
     <>
       <HeaderMenu />
       <Container maxW="container.xl">
-
       </Container>
       <Footer/>
     </>
