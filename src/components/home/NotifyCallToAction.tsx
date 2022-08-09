@@ -14,7 +14,7 @@ const NotifyCallToAction = () => {
         </Box>
         <InputGroup maxW='80' py='8' >
           <Input borderRadius='6' placeholder='Deixe seu e-mail' />
-          <InputRightAddon borderRadius='6' children='Cadastrar' color='black' />
+          <InputRightAddon cursor='pointer' borderRadius='6' children='Cadastrar' color='black' />
         </InputGroup>
       </Flex>
     </Flex>

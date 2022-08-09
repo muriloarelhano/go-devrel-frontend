@@ -1,5 +1,6 @@
 import { Container, Stack, Text, Divider } from '@chakra-ui/react'
 import React from 'react'
+import { Link } from 'react-router-dom'
 import NavBarItems from './NavBarItems'
 
 export interface MenuLinks {
@@ -14,20 +15,21 @@ export interface MenuOptions {
 
 const HeaderMenu: React.FunctionComponent<MenuOptions> = () => {
 
-  return (
-      <Container id="header"
-          position='absolute' maxW="full" paddingBottom={{ base: '2' }}>
-          <Container maxW="container.xl">
-              <Stack py="2" direction="row" as="header" justify="space-between" align="center" wrap="wrap">
-                  <Text fontSize='30' fontWeight='bold'>Go DevRel</Text>
-                  <NavBarItems />
-              </Stack>
+    return (
+        <Container id="header"
+            position='absolute' maxW="full" paddingBottom={{ base: '2' }}>
+            <Container maxW="container.xl">
+                <Stack py="2" direction="row" as="header" justify="space-between" align="center" wrap="wrap">
+                    <Link to={'/'}>
+                        <Text fontSize='30' fontWeight='bold'>Go DevRel</Text>
+                    </Link>
+                    <NavBarItems />
+                </Stack>
+            </Container>
+            <Divider />
 
-          </Container>
-          <Divider/>
-
-      </Container>
-  )
+        </Container>
+    )
 }
 
 export default HeaderMenu

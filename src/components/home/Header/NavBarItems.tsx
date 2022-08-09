@@ -1,4 +1,5 @@
-import { Button, Stack, Link } from '@chakra-ui/react'
+import { Button, Stack } from '@chakra-ui/react'
+import { Link } from 'react-router-dom'
 import React from 'react'
 
 
@@ -18,13 +19,13 @@ const NavBarItems: React.FunctionComponent = () => {
             fontWeight="semibold"
             fontSize='16'>
 
-            <Link variant="menu">Modelo</Link>
+            <Link to='/model'>Modelo</Link>
 
-            <Link variant="menu">Meu Estágio</Link>
+            <Link to='/my-stage'>Meu Estágio</Link>
 
-            <Link variant="menu">Formulários</Link>
+            <Link to='/forms'>Formulários</Link>
 
-            <Link variant="menu">Wiki</Link>
+            <Link to='/wiki'>Wiki</Link>
 
             <Button variant="solid"  colorScheme='purple'>Entrar</Button>
 
