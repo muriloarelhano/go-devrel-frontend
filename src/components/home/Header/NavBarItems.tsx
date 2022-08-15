@@ -4,25 +4,27 @@ import React from 'react'
 import ModalForm from '../ModalForm/ModalForm'
 
 
-const NavBarItems: React.FunctionComponent = () => {
+const NavBarItems: React.FunctionComponent<{menuIsOpen: boolean, toggle: any}> = ({menuIsOpen, toggle}) => {
     
     const { isOpen, onOpen, onClose } = useDisclosure();
 
 
     return (
         <Stack
-            display={{  lg: 'flex' }}
+        display={{ base: menuIsOpen ? "flex" : "none", lg: 'flex' }}
             paddingY='15px'
             direction={{ base: "column", md: 'row' }}
             flexBasis={{ base: "100%", lg: "40%" }}
             alignItems={{ base: "flex-start", md: 'center' }}
+            p={menuIsOpen ? '26px 12px' : '0'}
             justify="space-between"
             spacing={{ base: 14, md: 0 }}
             wrap="wrap"
             fontWeight="semibold"
-            fontSize='16'>
+            fontSize={menuIsOpen ? 'lg' : ''}>
 
-            <Link to='/model'>Modelo</Link>
+            <Link to='/model' onClick={()=>   toggle()
+            }>Modelo</Link>
 
             <Link to='/my-stage'>Meu Estágio</Link>
 
