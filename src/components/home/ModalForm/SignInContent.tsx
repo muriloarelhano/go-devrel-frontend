@@ -3,7 +3,7 @@ import InputMask from "react-input-mask";
 import { Button, HStack, FormControl, FormLabel, Input, ModalBody, ModalFooter } from "@chakra-ui/react"
 import React, { useState } from "react";
 import { CreateUser } from "../../../interfaces/createUser";
-import http from "../../../http";
+import http from "../../../services/axios";
 
 const SignInContent = () => {
   const [name, setName] = useState<CreateUser["first_name"]>('');
