@@ -4,8 +4,7 @@ export const Summary = () => {
     <HStack gap={5}>
       <Divider orientation="vertical" height={"8vh"} />
       <List>
-        <ListItem>Lorem</ListItem>
-        <ListItem>ipsum</ListItem>
+        <ListItem>Funcionalidade em contrução</ListItem>
       </List>
     </HStack>
   );

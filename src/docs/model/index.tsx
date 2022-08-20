@@ -1,29 +1,36 @@
+import { NoContent } from "../../components/Wiki/NoContent";
 import { SidebarItem } from "../../components/Wiki/SidebarItem";
+import { DevFlowDoc } from "./DevFlow";
 import { DevrelDoc } from "./Devrel";
 import { ModelDoc } from "./Model";
 import { PlatformAndProductsDoc } from "./PlatformAndProducts";
 
 export const modelPageItems: SidebarItem[] = [
   {
-    name: "model",
+    identifier: "model",
     label: "Conhecendo o modelo",
     pageContentComponent: <ModelDoc />,
     children: [
       {
         label: "Plataforma e produtos",
-        name: "plataform-and-products",
+        identifier: "plataform-and-products",
         pageContentComponent: <PlatformAndProductsDoc />,
       },
       {
         label: "Devrel",
-        name: "devrel",
+        identifier: "devrel",
         pageContentComponent: <DevrelDoc />,
+      },
+      {
+        label: "Fluxo de desenvolvedores",
+        identifier: "devflow",
+        pageContentComponent: <DevFlowDoc />,
       },
     ],
   },
   {
-    name: "about",
-    label: "Sobre o projeto",
-    pageContentComponent: <ModelDoc />,
+    identifier: "phases",
+    label: "Fases, estágios e facilitadores",
+    pageContentComponent: <NoContent />,
   },
 ];

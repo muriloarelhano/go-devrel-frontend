@@ -1,11 +1,10 @@
 import { Divider, List } from "@chakra-ui/react";
 import React from "react";
-import { getNestedPathCurrentItem } from "../../utils";
 import { SidebarItem, SidebarItemComponent } from "./SidebarItem";
 
 interface SidebarProps {
   items: SidebarItem[];
-  setCurrentPageState: any;
+  setCurrentPageComponent: any;
   setCurrentItemPath: any;
   depthStep?: number;
   depth?: number;
@@ -17,17 +16,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
   depthStep,
   depth,
   expanded,
-  setCurrentPageState,
+  setCurrentPageComponent,
   setCurrentItemPath,
 }) => {
-  const getPath = (name: string, subPathKey: string) => {
-    setCurrentItemPath(getNestedPathCurrentItem(items, subPathKey, name));
-  };
-
   return (
     <List>
       {items.map((sidebarItem, index) => (
-        <React.Fragment key={`${sidebarItem.name}${index}`}>
+        <React.Fragment key={`${sidebarItem.identifier}${index}`}>
           {sidebarItem.label === "divider" ? (
             <Divider />
           ) : (
@@ -36,8 +31,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
               depth={depth}
               expanded={expanded}
               item={sidebarItem}
-              setCurrentPageState={setCurrentPageState}
-              setCurrentItemPath={getPath}
+              setCurrentPageComponent={setCurrentPageComponent}
+              setCurrentItemPath={setCurrentItemPath}
             />
           )}
         </React.Fragment>

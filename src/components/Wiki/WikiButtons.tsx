@@ -5,27 +5,50 @@ import { SidebarItem } from "./SidebarItem";
 export interface WikiButtonsProps {
   nextItem?: SidebarItem;
   previousItem?: SidebarItem;
+  setCurrentPageComponent: any;
+  setCurrentItemPath: any;
 }
 
 export const WikiButtons: React.FC<WikiButtonsProps> = ({
   nextItem,
   previousItem,
+  setCurrentPageComponent,
+  setCurrentItemPath,
 }) => {
-  return (
-    <>
-      <HStack width={"100%"} justify={"space-between"}>
-        {previousItem ? (
-          <Button leftIcon={<FaArrowLeft />}>{previousItem.label}</Button>
-        ) : (
-          ""
-        )}
+  function onClick(item: SidebarItem) {
+    setCurrentPageComponent(item.pageContentComponent);
+    setCurrentItemPath(item.identifier, "children");
+  }
 
-        {nextItem ? (
-          <Button rightIcon={<FaArrowRight />}> {nextItem.label}</Button>
-        ) : (
-          ""
-        )}
-      </HStack>
-    </>
+  return (
+    <HStack
+      justifyContent={
+        previousItem && !nextItem
+          ? "start"
+          : !previousItem && nextItem
+          ? "end"
+          : "space-between"
+      }
+    >
+      {previousItem ? (
+        <Button
+          leftIcon={<FaArrowLeft />}
+          onClick={() => onClick(previousItem)}
+        >
+          {previousItem.label}
+        </Button>
+      ) : (
+        ""
+      )}
+
+      {nextItem ? (
+        <Button rightIcon={<FaArrowRight />} onClick={() => onClick(nextItem)}>
+          {" "}
+          {nextItem.label}
+        </Button>
+      ) : (
+        ""
+      )}
+    </HStack>
   );
 };

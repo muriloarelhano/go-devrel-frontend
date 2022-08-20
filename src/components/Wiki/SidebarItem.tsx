@@ -4,14 +4,14 @@ import {
   Divider,
   List,
   ListItem,
-  Text
+  Text,
 } from "@chakra-ui/react";
 import React, { ReactNode } from "react";
 import { FaArrowDown, FaArrowUp } from "react-icons/fa";
 
 export interface SidebarItem {
   label: string;
-  name?: string;
+  identifier: string;
   icon?: ReactNode;
   pageContentComponent?: JSX.Element;
   children?: SidebarItem[];
@@ -19,7 +19,7 @@ export interface SidebarItem {
 
 export interface SidebarItemProps {
   item: SidebarItem;
-  setCurrentPageState: any;
+  setCurrentPageComponent: any;
   setCurrentItemPath: any;
   depthStep?: number;
   depth?: number;
@@ -27,16 +27,16 @@ export interface SidebarItemProps {
 }
 
 export const SidebarItemComponent: React.FC<SidebarItemProps> = ({
+  item,
+  setCurrentPageComponent,
+  setCurrentItemPath,
+  expanded,
   depthStep = 10,
   depth = 0,
-  expanded,
-  item,
-  setCurrentPageState,
-  setCurrentItemPath,
   ...rest
 }) => {
   const [collapsed, setCollapsed] = React.useState(true);
-  const { label, children, icon, pageContentComponent, name } = item;
+  const { label, children, icon, pageContentComponent, identifier } = item;
 
   function toggleCollapse() {
     setCollapsed((prevValue) => !prevValue);
@@ -44,8 +44,8 @@ export const SidebarItemComponent: React.FC<SidebarItemProps> = ({
 
   function onClickItem() {
     if (pageContentComponent) {
-      setCurrentPageState(pageContentComponent);
-      setCurrentItemPath(name, "children");
+      setCurrentPageComponent(pageContentComponent);
+      setCurrentItemPath(identifier, "children");
       if (children) {
         toggleCollapse();
       }
@@ -84,7 +84,7 @@ export const SidebarItemComponent: React.FC<SidebarItemProps> = ({
         {Array.isArray(children) ? (
           <List>
             {children.map((subItem, index) => (
-              <React.Fragment key={`${subItem.name}${index}`}>
+              <React.Fragment key={`${subItem.identifier}${index}`}>
                 {subItem.label === "divider" ? (
                   <Divider />
                 ) : (
@@ -92,7 +92,7 @@ export const SidebarItemComponent: React.FC<SidebarItemProps> = ({
                     depth={depth + 1}
                     depthStep={depthStep}
                     item={subItem}
-                    setCurrentPageState={setCurrentPageState}
+                    setCurrentPageComponent={setCurrentPageComponent}
                     setCurrentItemPath={setCurrentItemPath}
                   />
                 )}

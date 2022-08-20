@@ -1,21 +1,23 @@
 import { SidebarItem } from "../components/Wiki/SidebarItem";
 
 export function getNestedPathCurrentItem(
-  arr: Array<any>,
+  arr: SidebarItem[],
   subPathKey: string,
-  name: string,
+  identifier: string,
   pathArr: number[] = []
 ): number[] | undefined {
   for (let key in arr) {
-    if (arr[key].name === name) {
+    if (arr[key].identifier === identifier) {
       pathArr.unshift(parseInt(key, 10));
       return pathArr;
     }
-    if (arr[key][subPathKey]) {
+    //@ts-ignore
+    const aux = arr[key][subPathKey] as any
+    if (aux) {
       const child = getNestedPathCurrentItem(
-        arr[key][subPathKey],
+        aux,
         subPathKey,
-        name
+        identifier
       );
       if (child) {
         child.unshift(parseInt(key, 10));
