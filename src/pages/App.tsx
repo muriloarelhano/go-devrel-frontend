@@ -6,15 +6,11 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home/>} />
-        <Route path="/model" element={<Model />
-        } />
-
+        <Route path="/" element={<Home />} />
+        <Route path="/model" element={<Model />} />
       </Routes>
     </BrowserRouter>
-
   );
-
-}
+};
 
 export default App;

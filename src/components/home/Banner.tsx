@@ -6,7 +6,7 @@ const Banner = () => {
             <Stack alignItems="center" justifyItems="center" justifyContent="space-between" py="24" px="10">
                 <Flex alignItems='center' textAlign='center' flex="0 0 50%" py="30px">
                     <Box>
-                        <Heading  fontSize='50'  color='black' fontWeight="bold">Um novo conceito de </Heading>
+                        <Heading  fontSize='50' fontWeight="bold">Um novo conceito de </Heading>
                         <Heading  fontSize='50' color="#4B59F7"  fontWeight="bold">gerenciamento para equipes <br></br>de software</Heading>
                     </Box>
                 </Flex>

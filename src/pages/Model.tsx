@@ -1,16 +1,14 @@
-import { Container } from "@chakra-ui/react";
+/* eslint-disable jsx-a11y/iframe-has-title */
+import HeaderMenu from "../components/Header/Header";
 import Footer from "../components/home/Footer";
-import HeaderMenu from "../components/home/Header/Header";
+import { Wiki } from "../components/Wiki/Wiki";
+import { modelPageItems } from "../docs/model";
 
 function Model() {
   return (
     <>
       <HeaderMenu />
-      <Container maxW="container.xl">
-        <iframe
-          src={"https://murilo-arelhano.gitbook.io/internal-wiki"}
-        ></iframe>
-      </Container>
+      <Wiki items={modelPageItems}></Wiki>
       <Footer />
     </>
   );
