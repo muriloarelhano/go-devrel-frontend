@@ -12,13 +12,9 @@ export function getNestedPathCurrentItem(
       return pathArr;
     }
     //@ts-ignore
-    const aux = arr[key][subPathKey] as any
+    const aux = arr[key][subPathKey] as any;
     if (aux) {
-      const child = getNestedPathCurrentItem(
-        aux,
-        subPathKey,
-        identifier
-      );
+      const child = getNestedPathCurrentItem(aux, subPathKey, identifier);
       if (child) {
         child.unshift(parseInt(key, 10));
         return child;
@@ -45,15 +41,11 @@ export function getPrevNextItem(
   if (len === currentItemIndex) {
     next = undefined;
   } else {
-    // Check if current item have children value
-    if (
-      itemsArray[currentItemIndex].children &&
-      itemsArray[currentItemIndex].children!.length > 1
-    ) {
-      next = itemsArray[currentItemIndex].children![0];
-    } else {
-      next = itemsArray[currentItemIndex + 1];
-    }
+    next = itemsArray[currentItemIndex + 1];
+  }
+
+  if (itemsArray[currentItemIndex].children) {
+    next = itemsArray[currentItemIndex].children![0];
   }
 
   return {
@@ -62,12 +54,20 @@ export function getPrevNextItem(
   };
 }
 
+/**
+ * This function can be used to get array of items based on path of current item selected
+ * @param array Root items array
+ * @param path Array with indexes (path) to current component of items tree
+ * @returns Array with current items on same depth of current component
+ */
 export function getDeepestChildrenArrayPath(
   array: SidebarItem[],
   path: number[]
 ): SidebarItem[] {
-  let aux: any = [...array];
-  for (const key in path) {
+  const auxPath = [...path];
+  auxPath.pop();
+  let aux: any[] = [...array];
+  for (const key in auxPath) {
     aux = aux[key].children;
   }
   return aux;

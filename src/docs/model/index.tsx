@@ -17,13 +17,13 @@ export const modelPageItems: SidebarItem[] = [
         pageContentComponent: <PlatformAndProductsDoc />,
       },
       {
-        label: "Devrel",
         identifier: "devrel",
+        label: "Devrel",
         pageContentComponent: <DevrelDoc />,
       },
       {
-        label: "Fluxo de desenvolvedores",
         identifier: "devflow",
+        label: "Fluxo de desenvolvedores",
         pageContentComponent: <DevFlowDoc />,
       },
     ],
@@ -33,4 +33,5 @@ export const modelPageItems: SidebarItem[] = [
     label: "Fases, estágios e facilitadores",
     pageContentComponent: <NoContent />,
   },
+
 ];

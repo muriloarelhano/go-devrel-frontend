@@ -38,19 +38,14 @@ export const SidebarItemComponent: React.FC<SidebarItemProps> = ({
   const [collapsed, setCollapsed] = React.useState(true);
   const { label, children, icon, pageContentComponent, identifier } = item;
 
-  function toggleCollapse() {
-    setCollapsed((prevValue) => !prevValue);
-  }
-
   function onClickItem() {
     if (pageContentComponent) {
-      setCurrentPageComponent(pageContentComponent);
+      if (children) setCollapsed(!collapsed);
+
       setCurrentItemPath(identifier, "children");
-      if (children) {
-        toggleCollapse();
-      }
+      setCurrentPageComponent(pageContentComponent);
     } else {
-      toggleCollapse();
+      setCollapsed(!collapsed);
     }
   }
 

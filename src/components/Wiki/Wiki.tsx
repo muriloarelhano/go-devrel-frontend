@@ -19,32 +19,28 @@ export const Wiki: React.FC<WikiProps> = ({ items }) => {
   // Complete path to array index of current item on content
   const [currentItemPath, setCurrentItemPath] = useState<number[]>([0]);
 
+  // Page to render on content
+  const [currentPageComponent, setCurrentPageComponent] = useState<JSX.Element>(
+    items[0].pageContentComponent || <NoContent />
+  );
+
   const [previousItem, setPreviousItem] = useState<SidebarItem | undefined>();
 
   const [nextItem, setNextItem] = useState<SidebarItem | undefined>();
 
-  // Page to render on content
-  const [currentPageComponent, setCurrentPageComponent] = useState<JSX.Element>(
-    items[currentItemPath[currentItemPath.length - 1]].pageContentComponent || (
-      <NoContent />
-    )
-  );
-
   const setPath = (identifier: string, subPathKey: string) => {
-    setCurrentItemPath(
-      getNestedPathCurrentItem(items, subPathKey, identifier) || []
-    );
+    const temp = getNestedPathCurrentItem(items, subPathKey, identifier) || [];
+    setCurrentItemPath(temp);
   };
 
   useEffect(() => {
-    console.log("Current Page:", currentPageComponent);
-    console.log("Current Path:", currentItemPath);
     if (currentItemPath.length > 1) {
-      const aux = [...currentItemPath];
-      aux.pop();
-      console.log("GetChildrenArray:", getDeepestChildrenArrayPath(items, aux));
+      const currentItemsArray = getDeepestChildrenArrayPath(
+        items,
+        currentItemPath
+      );
       const { next, prev } = getPrevNextItem(
-        getDeepestChildrenArrayPath(items, aux),
+        currentItemsArray,
         currentItemPath[currentItemPath.length - 1]
       );
       setPreviousItem(prev);
@@ -54,7 +50,7 @@ export const Wiki: React.FC<WikiProps> = ({ items }) => {
       setPreviousItem(prev);
       setNextItem(next);
     }
-  }, [currentItemPath, currentPageComponent, items]);
+  }, [currentItemPath, items]);
 
   return (
     <Container maxW={"container.xl"}>
