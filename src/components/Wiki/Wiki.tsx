@@ -9,6 +9,7 @@ import {
   getPrevNextItem,
   getDeepestChildrenArrayPath,
   getNestedPathCurrentItem,
+  getNestedHeadings,
 } from "../../utils";
 
 export interface WikiProps {
@@ -19,32 +20,35 @@ export const Wiki: React.FC<WikiProps> = ({ items }) => {
   // Complete path to array index of current item on content
   const [currentItemPath, setCurrentItemPath] = useState<number[]>([0]);
 
+  // Page to render on content
+  const [currentPageComponent, setCurrentPageComponent] = useState<JSX.Element>(
+    items[0].pageContentComponent || <NoContent />
+  );
+
   const [previousItem, setPreviousItem] = useState<SidebarItem | undefined>();
 
   const [nextItem, setNextItem] = useState<SidebarItem | undefined>();
 
-  // Page to render on content
-  const [currentPageComponent, setCurrentPageComponent] = useState<JSX.Element>(
-    items[currentItemPath[currentItemPath.length - 1]].pageContentComponent || (
-      <NoContent />
-    )
-  );
+  const [nestedHeadings, setNestedHeadings] = useState<any>([]);
 
   const setPath = (identifier: string, subPathKey: string) => {
-    setCurrentItemPath(
-      getNestedPathCurrentItem(items, subPathKey, identifier) || []
-    );
+    const temp = getNestedPathCurrentItem(items, subPathKey, identifier) || [];
+    setCurrentItemPath(temp);
   };
 
   useEffect(() => {
-    console.log("Current Page:", currentPageComponent);
-    console.log("Current Path:", currentItemPath);
+    const headingElements = Array.from(document.querySelectorAll("h2, h3"));
+
+    const newNestedHeadings = getNestedHeadings(headingElements);
+    setNestedHeadings(newNestedHeadings);
+
     if (currentItemPath.length > 1) {
-      const aux = [...currentItemPath];
-      aux.pop();
-      console.log("GetChildrenArray:", getDeepestChildrenArrayPath(items, aux));
+      const currentItemsArray = getDeepestChildrenArrayPath(
+        items,
+        currentItemPath
+      );
       const { next, prev } = getPrevNextItem(
-        getDeepestChildrenArrayPath(items, aux),
+        currentItemsArray,
         currentItemPath[currentItemPath.length - 1]
       );
       setPreviousItem(prev);
@@ -54,14 +58,14 @@ export const Wiki: React.FC<WikiProps> = ({ items }) => {
       setPreviousItem(prev);
       setNextItem(next);
     }
-  }, [currentItemPath, currentPageComponent, items]);
+  }, [currentItemPath, items]);
 
   return (
     <Container maxW={"container.xl"}>
       <Grid
         gap={8}
         my={8}
-        gridTemplateColumns={"0.8fr 3fr 0.5fr"}
+        gridTemplateColumns={"0.6fr 3fr 0.7fr"}
         templateAreas={`"sidebar content summary"
                     "sidebar buttons summary"`}
       >
@@ -76,7 +80,7 @@ export const Wiki: React.FC<WikiProps> = ({ items }) => {
           {currentPageComponent}
         </GridItem>
         <GridItem area={"summary"}>
-          <Summary />
+          <Summary headings={nestedHeadings} />
         </GridItem>
         <GridItem area={"buttons"}>
           <WikiButtons
