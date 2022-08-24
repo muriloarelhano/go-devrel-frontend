@@ -3,7 +3,7 @@ import { Heading, Text } from "@chakra-ui/react";
 export const DevFlowDoc: React.FC = () => {
   return (
     <>
-      <Heading>Fluxo de avanço do desenvolvedor</Heading>
+      <Heading id="flux">Fluxo de avanço do desenvolvedor</Heading>
       <Text>
         🔍 Esta área de foco tem como objetivo apoiar no acompanhamento e
         análise do avanço dos desenvolvedores dentro do ecossistema. Entender

@@ -72,3 +72,22 @@ export function getDeepestChildrenArrayPath(
   }
   return aux;
 }
+
+export function getNestedHeadings(headingElements: any) {
+  const nestedHeadings: any[] = [];
+
+  headingElements.forEach((heading: any, index: number) => {
+    const { innerText: title, id } = heading;
+
+    if (heading.nodeName === "H2") {
+      nestedHeadings.push({ id, title, items: [] });
+    } else if (heading.nodeName === "H3" && nestedHeadings.length > 0) {
+      nestedHeadings[nestedHeadings.length - 1].items.push({
+        id,
+        title,
+      });
+    }
+  });
+
+  return nestedHeadings;
+}

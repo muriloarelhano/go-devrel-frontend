@@ -9,6 +9,7 @@ import {
   getPrevNextItem,
   getDeepestChildrenArrayPath,
   getNestedPathCurrentItem,
+  getNestedHeadings,
 } from "../../utils";
 
 export interface WikiProps {
@@ -28,12 +29,19 @@ export const Wiki: React.FC<WikiProps> = ({ items }) => {
 
   const [nextItem, setNextItem] = useState<SidebarItem | undefined>();
 
+  const [nestedHeadings, setNestedHeadings] = useState<any>([]);
+
   const setPath = (identifier: string, subPathKey: string) => {
     const temp = getNestedPathCurrentItem(items, subPathKey, identifier) || [];
     setCurrentItemPath(temp);
   };
 
   useEffect(() => {
+    const headingElements = Array.from(document.querySelectorAll("h2, h3"));
+
+    const newNestedHeadings = getNestedHeadings(headingElements);
+    setNestedHeadings(newNestedHeadings);
+
     if (currentItemPath.length > 1) {
       const currentItemsArray = getDeepestChildrenArrayPath(
         items,
@@ -57,7 +65,7 @@ export const Wiki: React.FC<WikiProps> = ({ items }) => {
       <Grid
         gap={8}
         my={8}
-        gridTemplateColumns={"0.8fr 3fr 0.5fr"}
+        gridTemplateColumns={"0.6fr 3fr 0.7fr"}
         templateAreas={`"sidebar content summary"
                     "sidebar buttons summary"`}
       >
@@ -72,7 +80,7 @@ export const Wiki: React.FC<WikiProps> = ({ items }) => {
           {currentPageComponent}
         </GridItem>
         <GridItem area={"summary"}>
-          <Summary />
+          <Summary headings={nestedHeadings} />
         </GridItem>
         <GridItem area={"buttons"}>
           <WikiButtons
