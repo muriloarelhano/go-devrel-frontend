@@ -1,6 +1,7 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./Home";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Model from "./Model";
+import { WikiPage } from "./Wiki";
 
 const App = () => {
   return (
@@ -8,6 +9,9 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/model" element={<Model />} />
+        <Route path="/my-stage" element={<Home />} />
+        <Route path="/forms" element={<Home />} />
+        <Route path="/wiki" element={<WikiPage />} />
       </Routes>
     </BrowserRouter>
   );

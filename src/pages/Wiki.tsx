@@ -2,16 +2,14 @@
 import HeaderMenu from "../components/Header/Header";
 import Footer from "../components/home/Footer";
 import { Wiki } from "../components/Wiki/Wiki";
-import { modelPageItems } from "../docs/model";
+import { wikiPageItems } from "../docs/wiki";
 
-function Model() {
+export function WikiPage() {
   return (
     <>
       <HeaderMenu />
-      <Wiki items={modelPageItems}></Wiki>
+      <Wiki items={wikiPageItems}></Wiki>
       <Footer />
     </>
   );
 }
-
-export default Model;
