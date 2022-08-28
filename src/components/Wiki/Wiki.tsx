@@ -1,16 +1,17 @@
+import { Container, Grid, GridItem, Stack } from "@chakra-ui/react";
+import style from "./Custom.module.css";
 import React, { useEffect, useState } from "react";
-import { Container, Grid, GridItem } from "@chakra-ui/react";
+import {
+  getDeepestChildrenArrayPath,
+  getNestedHeadings,
+  getNestedPathCurrentItem,
+  getPrevNextItem,
+} from "../../utils";
+import { NoContent } from "./NoContent";
 import { Sidebar } from "./Sidebar";
+import { SidebarItem } from "./SidebarItem";
 import { Summary } from "./Summary";
 import { WikiButtons } from "./WikiButtons";
-import { SidebarItem } from "./SidebarItem";
-import { NoContent } from "./NoContent";
-import {
-  getPrevNextItem,
-  getDeepestChildrenArrayPath,
-  getNestedPathCurrentItem,
-  getNestedHeadings,
-} from "../../utils";
 
 export interface WikiProps {
   items: SidebarItem[];
@@ -61,11 +62,11 @@ export const Wiki: React.FC<WikiProps> = ({ items }) => {
   }, [currentItemPath, items]);
 
   return (
-    <Container maxW={"container.xl"}>
+    <Container maxW={"1600px"}>
       <Grid
-        gap={8}
+        gap={12}
         my={8}
-        gridTemplateColumns={"0.6fr 3fr 0.7fr"}
+        gridTemplateColumns={"0.7fr 3fr 0.8fr"}
         templateAreas={`"sidebar content summary"
                     "sidebar buttons summary"`}
       >
@@ -76,8 +77,15 @@ export const Wiki: React.FC<WikiProps> = ({ items }) => {
             setCurrentItemPath={setPath}
           ></Sidebar>
         </GridItem>
-        <GridItem area={"content"} height={"71vh"} overflowY={"auto"}>
-          {currentPageComponent}
+        <GridItem
+          area={"content"}
+          height={"69.7vh"}
+          overflowY={"auto"}
+          className={style.sideBar}
+        >
+          <Stack direction={"column"} gap={2}>
+            {currentPageComponent}
+          </Stack>
         </GridItem>
         <GridItem area={"summary"}>
           <Summary headings={nestedHeadings} />
