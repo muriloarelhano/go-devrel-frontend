@@ -1,0 +1,34 @@
+.sideBar {
+  padding-right: 20px;
+  margin-left: -12px;
+  position: "-webkit-sticky";
+  top: 0;
+  height: 100vh;
+  overflow-y: scroll;
+  /* width */
+}
+
+.sideBar::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+.sideBar::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 2px grey;
+  border-radius: 10px;
+}
+
+html[data-theme="light"] .sideBar::-webkit-scrollbar-thumb {
+  background: var(--chakra-colors-gray-700);
+  border-radius: 10px;
+}
+
+html[data-theme="dark"] .sideBar::-webkit-scrollbar-thumb {
+  background: var(--chakra-colors-gray-500);
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+.sideBar::-webkit-scrollbar-thumb:hover {
+  background: #009eb3;
+}
