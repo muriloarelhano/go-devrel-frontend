@@ -28,14 +28,15 @@ const SignInContent = () => {
   const onSubmitForm = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    const user = await createUser(values!);
 
-    console.log(values)
-
-    createUser(values!).then(() => alert('Usuário cadastrado com sucesso.'))
-    .catch((e) => {
+    if(user){
+    alert('Usuário cadastrado com sucesso.')
+    }
+    else {
       alert('Erro ao cadastrar o usuário.');
-      console.log(e)
-    });
+    }
+    
   }
 
   function handleChange(event: { target: { value: any; name: any; }; } ) {
