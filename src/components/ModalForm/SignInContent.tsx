@@ -42,7 +42,7 @@ const SignInContent = () => {
 
     http.request({
       url: '/user',
-      method: 'POST',
+      method: 'GET',
       headers: { 'Content-Type': "multipart/form-data" },
       data: formData
     })
@@ -56,7 +56,7 @@ const SignInContent = () => {
   const onSubmit = (values: CreateUser) => console.log(values);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={onSubmitForm}>
 
       <ModalBody pb='6'>
         <HStack>
