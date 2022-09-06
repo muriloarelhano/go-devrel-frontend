@@ -12,8 +12,8 @@ export async function getUser() {
 
 export async function createUser(data: CreateUser) {
   try {
-    const response = await http.get('/user', {data,   headers: { 'Content-Type': "multipart/form-data" }});
-    return(response);
+    const response = await http.post('/user', {data,   headers: { 'Content-Type': "application/json" }});
+    return(response.data);
   } catch (error) {
     console.error(error);
   }
