@@ -15,9 +15,10 @@ import { WikiButtons } from "./WikiButtons";
 
 export interface WikiProps {
   items: SidebarItem[];
+  format: "wiki" | "forms";
 }
 
-export const Wiki: React.FC<WikiProps> = ({ items }) => {
+export const Wiki: React.FC<WikiProps> = ({ items, format }) => {
   // Complete path to array index of current item on content
   const [currentItemPath, setCurrentItemPath] = useState<number[]>([0]);
 
@@ -43,23 +44,25 @@ export const Wiki: React.FC<WikiProps> = ({ items }) => {
     const newNestedHeadings = getNestedHeadings(headingElements);
     setNestedHeadings(newNestedHeadings);
 
-    if (currentItemPath.length > 1) {
-      const currentItemsArray = getDeepestChildrenArrayPath(
-        items,
-        currentItemPath
-      );
-      const { next, prev } = getPrevNextItem(
-        currentItemsArray,
-        currentItemPath[currentItemPath.length - 1]
-      );
-      setPreviousItem(prev);
-      setNextItem(next);
-    } else {
-      const { next, prev } = getPrevNextItem(items, currentItemPath[0]);
-      setPreviousItem(prev);
-      setNextItem(next);
+    if (format === "wiki") {
+      if (currentItemPath.length > 1) {
+        const currentItemsArray = getDeepestChildrenArrayPath(
+          items,
+          currentItemPath
+        );
+        const { next, prev } = getPrevNextItem(
+          currentItemsArray,
+          currentItemPath[currentItemPath.length - 1]
+        );
+        setPreviousItem(prev);
+        setNextItem(next);
+      } else {
+        const { next, prev } = getPrevNextItem(items, currentItemPath[0]);
+        setPreviousItem(prev);
+        setNextItem(next);
+      }
     }
-  }, [currentItemPath, items]);
+  }, [currentItemPath, items, format]);
 
   return (
     <Container maxW={"1600px"}>
@@ -87,17 +90,23 @@ export const Wiki: React.FC<WikiProps> = ({ items }) => {
             {currentPageComponent}
           </Stack>
         </GridItem>
-        <GridItem area={"summary"}>
-          <Summary headings={nestedHeadings} />
-        </GridItem>
-        <GridItem area={"buttons"}>
-          <WikiButtons
-            nextItem={nextItem}
-            previousItem={previousItem}
-            setCurrentPageComponent={setCurrentPageComponent}
-            setCurrentItemPath={setPath}
-          />
-        </GridItem>
+        {format === "wiki" ? (
+          <>
+            <GridItem area={"summary"}>
+              <Summary headings={nestedHeadings} />
+            </GridItem>
+            <GridItem area={"buttons"}>
+              <WikiButtons
+                nextItem={nextItem}
+                previousItem={previousItem}
+                setCurrentPageComponent={setCurrentPageComponent}
+                setCurrentItemPath={setPath}
+              />
+            </GridItem>
+          </>
+        ) : (
+          ""
+        )}
       </Grid>
     </Container>
   );

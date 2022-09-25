@@ -8,7 +8,7 @@ function Model() {
   return (
     <>
       <HeaderMenu />
-      <Wiki items={modelPageItems}></Wiki>
+      <Wiki items={modelPageItems}  format={'wiki'} ></Wiki>
       <Footer />
     </>
   );
