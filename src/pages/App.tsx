@@ -1,7 +1,10 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import nookies from 'nookies'
+
 import Home from "./Home";
 import Model from "./Model";
 import { WikiPage } from "./Wiki";
+import { tokenService } from "../services/tokenService";
 
 const App = () => {
   return (
@@ -18,3 +21,13 @@ const App = () => {
 };
 
 export default App;
+
+export async function getServerSideProps(ctx: any) {
+  nookies.get(ctx);
+
+  return { 
+    props: {
+      token: tokenService.get(ctx)
+    }
+  }
+}
