@@ -1,4 +1,4 @@
-import { QuestionItem } from "./Questions";
+import { QuestionItem } from "../Questions";
 
 export const step1: QuestionItem[] = [
   {

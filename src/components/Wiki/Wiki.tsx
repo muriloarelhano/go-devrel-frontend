@@ -65,13 +65,18 @@ export const Wiki: React.FC<WikiProps> = ({ items, format }) => {
   }, [currentItemPath, items, format]);
 
   return (
-    <Container maxW={"1600px"}>
+    <Container maxW={"80vw"}>
       <Grid
         gap={12}
         my={8}
-        gridTemplateColumns={"0.7fr 3fr 0.8fr"}
-        templateAreas={`"sidebar content summary"
-                    "sidebar buttons summary"`}
+        gridTemplateColumns={format === "wiki" ? "0.5fr 4fr 1fr" : "1fr 4fr"}
+        templateAreas={
+          format === "wiki"
+            ? `"sidebar content summary"
+          "sidebar buttons summary"`
+            : `"sidebar content"
+         "sidebar buttons"`
+        }
       >
         <GridItem area={"sidebar"}>
           <Sidebar

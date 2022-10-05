@@ -30,8 +30,8 @@ export const Questions: React.FC<QuestionsProps> = ({
       <VStack align={"start"}>
         {questions.map((el) => (
           <Checkbox
-            id={formGroup + ".checked"}
-            name={formGroup + ".checked"}
+            id={"responses." + formGroup + ".checked"}
+            name={"responses." + formGroup + ".checked"}
             onChange={formik.handleChange}
             value={el.value}
           >
@@ -42,10 +42,10 @@ export const Questions: React.FC<QuestionsProps> = ({
       <FormControl mt={5}>
         <FormLabel>Outros: </FormLabel>
         <Textarea
-          id={formGroup + ".otherInformation"}
-          name={formGroup + ".otherInformation"}
+          id={"responses." + formGroup + ".otherInformation"}
+          name={"responses." + formGroup + ".otherInformation"}
           onChange={formik.handleChange}
-          value={formik.values[formGroup].otherInformation}
+          value={formik.values.responses[formGroup].otherInformation}
         />
       </FormControl>
     </>

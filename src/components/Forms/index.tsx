@@ -1,16 +1,18 @@
 import { NoContent } from "../Wiki/NoContent";
 import { SidebarItem } from "../Wiki/SidebarItem";
-import { DevFlowForm } from "./Questionnaires/DevFlowForm";
-import { DevRelForm } from "./Questionnaires/DevrelForm";
-import { MonitoringForm } from "./Questionnaires/MonitoringFom";
-import { PlatformAndProductsForm } from "./Questionnaires/PlatformAndProducts";
+import { Questionnaire } from "./Questionnaire";
+import {
+  PlatProdFormInitialValues,
+  PlatProdFormSteps,
+} from "./QuestionnairiesConfig/PlatformAndProducts";
 import { AwarenessStage } from "./Stages/Awareness";
+import { StartPage } from "./Stages/StartPage";
 
 export const FORMS: SidebarItem[] = [
   {
     identifier: "start",
     label: "Inicio",
-    pageContentComponent: <NoContent />,
+    pageContentComponent: <StartPage />,
   },
   {
     identifier: "awareness",
@@ -20,22 +22,50 @@ export const FORMS: SidebarItem[] = [
       {
         identifier: "platform-products-form",
         label: "Plataforma e Produtos",
-        pageContentComponent: <PlatformAndProductsForm />,
+        pageContentComponent: (
+          <Questionnaire
+            steps={PlatProdFormSteps}
+            formikInitialValues={PlatProdFormInitialValues}
+            formStage={"awareness"}
+            title={"Plataforma e Produtos"}
+          />
+        ),
       },
       {
         identifier: "devrel-form",
         label: "Developer Relations",
-        pageContentComponent: <DevRelForm />,
+        pageContentComponent: (
+          <Questionnaire
+            steps={PlatProdFormSteps}
+            formikInitialValues={PlatProdFormInitialValues}
+            formStage={"awareness"}
+            title={"Developer Relations"}
+          />
+        ),
       },
       {
         identifier: "monitoring-form",
         label: "Monitoramento",
-        pageContentComponent: <MonitoringForm />,
+        pageContentComponent: (
+          <Questionnaire
+            steps={PlatProdFormSteps}
+            formikInitialValues={PlatProdFormInitialValues}
+            formStage={"awareness"}
+            title={"Monitoramento"}
+          />
+        ),
       },
       {
         identifier: "devflow-form",
         label: "Fluxo do Desenvolvedor",
-        pageContentComponent: <DevFlowForm />,
+        pageContentComponent: (
+          <Questionnaire
+            steps={PlatProdFormSteps}
+            formikInitialValues={PlatProdFormInitialValues}
+            formStage={"awareness"}
+            title={"Fluxo do Desenvolvedor"}
+          />
+        ),
       },
     ],
   },
