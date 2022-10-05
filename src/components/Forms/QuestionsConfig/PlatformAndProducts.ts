@@ -1,6 +1,6 @@
 import { QuestionItem } from "../Questions";
 
-export const step1: QuestionItem[] = [
+export const PlatProdFormStep1: QuestionItem[] = [
   {
     label:
       "1. Fornecer informações e recursos que apoiem as metas de uma organização em relação à produtividade",
@@ -21,7 +21,7 @@ export const step1: QuestionItem[] = [
   },
 ];
 
-export const step2: QuestionItem[] = [
+export const PlatProdFormStep2: QuestionItem[] = [
   {
     label:
       "1. Fornecer informações e recursos que apoiem as metas de uma organização em relação à produtividade",
@@ -42,7 +42,7 @@ export const step2: QuestionItem[] = [
   },
 ];
 
-export const step3: QuestionItem[] = [
+export const PlatProdFormStep3: QuestionItem[] = [
   {
     label:
       "1. Fornecer informações e recursos que apoiem as metas de uma organização em relação à produtividade",

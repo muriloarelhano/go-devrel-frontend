@@ -1,12 +1,9 @@
+import { EStages } from "../../interfaces";
 import { NoContent } from "../Wiki/NoContent";
 import { SidebarItem } from "../Wiki/SidebarItem";
-import { Questionnaire } from "./Questionnaire";
-import {
-  PlatProdFormInitialValues,
-  PlatProdFormSteps,
-} from "./QuestionnairiesConfig/PlatformAndProducts";
 import { AwarenessStage } from "./Stages/Awareness";
 import { StartPage } from "./Stages/StartPage";
+import { prepareStageForms } from "./utils";
 
 export const FORMS: SidebarItem[] = [
   {
@@ -15,83 +12,39 @@ export const FORMS: SidebarItem[] = [
     pageContentComponent: <StartPage />,
   },
   {
-    identifier: "awareness",
+    identifier: EStages.AWARENESS,
     label: "Sensibilização",
     pageContentComponent: <AwarenessStage />,
-    children: [
-      {
-        identifier: "platform-products-form",
-        label: "Plataforma e Produtos",
-        pageContentComponent: (
-          <Questionnaire
-            steps={PlatProdFormSteps}
-            formikInitialValues={PlatProdFormInitialValues}
-            formStage={"awareness"}
-            title={"Plataforma e Produtos"}
-          />
-        ),
-      },
-      {
-        identifier: "devrel-form",
-        label: "Developer Relations",
-        pageContentComponent: (
-          <Questionnaire
-            steps={PlatProdFormSteps}
-            formikInitialValues={PlatProdFormInitialValues}
-            formStage={"awareness"}
-            title={"Developer Relations"}
-          />
-        ),
-      },
-      {
-        identifier: "monitoring-form",
-        label: "Monitoramento",
-        pageContentComponent: (
-          <Questionnaire
-            steps={PlatProdFormSteps}
-            formikInitialValues={PlatProdFormInitialValues}
-            formStage={"awareness"}
-            title={"Monitoramento"}
-          />
-        ),
-      },
-      {
-        identifier: "devflow-form",
-        label: "Fluxo do Desenvolvedor",
-        pageContentComponent: (
-          <Questionnaire
-            steps={PlatProdFormSteps}
-            formikInitialValues={PlatProdFormInitialValues}
-            formStage={"awareness"}
-            title={"Fluxo do Desenvolvedor"}
-          />
-        ),
-      },
-    ],
+    children: prepareStageForms(EStages.AWARENESS),
   },
   {
     identifier: "beginning",
     label: "Entrada",
     pageContentComponent: <NoContent />,
+    children: prepareStageForms(EStages.BEGINNING),
   },
   {
     identifier: "activate",
     label: "Ativação",
     pageContentComponent: <NoContent />,
+    children: prepareStageForms(EStages.ACTIVATE),
   },
   {
     identifier: "retention",
     label: "Retenção",
     pageContentComponent: <NoContent />,
+    children: prepareStageForms(EStages.RETENTION),
   },
   {
     identifier: "recognition",
     label: "Conhecimento",
     pageContentComponent: <NoContent />,
+    children: prepareStageForms(EStages.RECOGNITION),
   },
   {
     identifier: "reference",
     label: "Referência",
     pageContentComponent: <NoContent />,
+    children: prepareStageForms(EStages.REFERENCE),
   },
 ];

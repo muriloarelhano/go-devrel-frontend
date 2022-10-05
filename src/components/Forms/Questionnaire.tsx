@@ -1,10 +1,11 @@
 import { Flex, Heading, useToast } from "@chakra-ui/react";
 import { FormikProps, useFormik } from "formik";
 import React from "react";
+import { StageFormValues } from "../../interfaces";
 import { StepComponentItem, StepsComponent } from "./StepsComponent";
 
 interface QuestionnaireProps {
-  formikInitialValues: any;
+  formikInitialValues: Partial<StageFormValues>;
   formStage: string;
   title: string;
   steps: (formik: FormikProps<any>) => StepComponentItem[];
