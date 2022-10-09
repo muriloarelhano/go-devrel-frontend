@@ -16,13 +16,13 @@ export interface QuestionItem {
 export interface QuestionsProps {
   formik: FormikProps<any>;
   questions: QuestionItem[];
-  formGroup: string;
+  responsesGroup: string;
 }
 
 export const Questions: React.FC<QuestionsProps> = ({
   formik,
   questions,
-  formGroup,
+  responsesGroup,
 }) => {
   return (
     <>
@@ -31,8 +31,8 @@ export const Questions: React.FC<QuestionsProps> = ({
         {questions.map((el: any, index: number) => (
           <Checkbox
             key={index}
-            id={"responses." + formGroup + ".checked"}
-            name={"responses." + formGroup + ".checked"}
+            id={"responses." + responsesGroup + ".checked"}
+            name={"responses." + responsesGroup + ".checked"}
             onChange={formik.handleChange}
             value={el.value}
           >
@@ -43,10 +43,10 @@ export const Questions: React.FC<QuestionsProps> = ({
       <FormControl mt={5}>
         <FormLabel>Outros: </FormLabel>
         <Textarea
-          id={"responses." + formGroup + ".otherInformation"}
-          name={"responses." + formGroup + ".otherInformation"}
+          id={"responses." + responsesGroup + ".otherInformation"}
+          name={"responses." + responsesGroup + ".otherInformation"}
           onChange={formik.handleChange}
-          value={formik.values.responses[formGroup].otherInformation}
+          value={formik.values.responses[responsesGroup].otherInformation}
         />
       </FormControl>
     </>

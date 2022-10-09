@@ -37,7 +37,7 @@ export const PlatProdFormSteps = (formik: FormikProps<any>) => [
       <Questions
         formik={formik}
         questions={PlatProdFormStep1}
-        formGroup={"goals"}
+        responsesGroup={"goals"}
       />
     ),
   },
@@ -48,7 +48,7 @@ export const PlatProdFormSteps = (formik: FormikProps<any>) => [
       <Questions
         formik={formik}
         questions={PlatProdFormStep2}
-        formGroup={"components"}
+        responsesGroup={"components"}
       />
     ),
   },
@@ -59,7 +59,7 @@ export const PlatProdFormSteps = (formik: FormikProps<any>) => [
       <Questions
         formik={formik}
         questions={PlatProdFormStep3}
-        formGroup={"objectsConsume"}
+        responsesGroup={"objectsConsume"}
       />
     ),
   },
@@ -70,7 +70,7 @@ export const PlatProdFormSteps = (formik: FormikProps<any>) => [
       <Questions
         formik={formik}
         questions={PlatProdFormStep3}
-        formGroup={"objectsProvide"}
+        responsesGroup={"objectsProvide"}
       />
     ),
   },

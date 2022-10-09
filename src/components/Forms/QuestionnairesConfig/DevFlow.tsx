@@ -18,7 +18,7 @@ export const DevFlowFormSteps = (formik: FormikProps<any>) => [
     label: "Objetivo",
     description: "Objetivo De Plataforma E Produtos",
     questionsComponent: (
-      <Questions formik={formik} questions={DevFlowStep1} formGroup={"goals"} />
+      <Questions formik={formik} questions={DevFlowStep1} responsesGroup={"goals"} />
     ),
   },
 ];

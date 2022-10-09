@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FormikProps, useFormik } from "formik";
 import { StageFormValues } from "../../interfaces";
 import { Step, Steps, useSteps } from "chakra-ui-steps";
@@ -24,6 +24,7 @@ export const Questionnaire: React.FC<QuestionnaireProps> = ({
   prepareSteps,
 }) => {
   const toast = useToast();
+  const [onError, setOnError] = useState(false);
 
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,
@@ -41,7 +42,7 @@ export const Questionnaire: React.FC<QuestionnaireProps> = ({
   const formik = useFormik({
     initialValues: { stage: formStage, ...formikInitialValues },
     onSubmit: async (values) => {
-      sendFormResponse(values, toast);
+      sendFormResponse(values, toast, setOnError);
     },
   });
 
@@ -75,10 +76,12 @@ export const Questionnaire: React.FC<QuestionnaireProps> = ({
         {activeStep === steps.length ? (
           <Flex px={4} py={4} width="100%" flexDirection="column">
             <Heading fontSize="xl" textAlign="center">
-              Muito obrigado pela sua colaboração!!
+              {onError
+                ? "Oops, acho que algo deu errado ;-;"
+                : "Muito obrigado pela sua colaboração!!"}
             </Heading>
             <Button mx="auto" mt={6} size="sm" onClick={() => reset()}>
-              Voltar do começo
+              {onError ? "Tentar novamente" : "Voltar do inicio"}
             </Button>
           </Flex>
         ) : (
