@@ -28,8 +28,9 @@ export const Questions: React.FC<QuestionsProps> = ({
     <>
       {" "}
       <VStack align={"start"}>
-        {questions.map((el) => (
+        {questions.map((el: any, index: number) => (
           <Checkbox
+            key={index}
             id={"responses." + formGroup + ".checked"}
             name={"responses." + formGroup + ".checked"}
             onChange={formik.handleChange}

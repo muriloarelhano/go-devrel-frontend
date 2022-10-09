@@ -17,7 +17,7 @@ export const prepareStageForms = (stage: EStages) => [
       <Questionnaire
         title={"Plataforma e Produtos"}
         formStage={stage}
-        steps={PlatProdFormSteps}
+        prepareSteps={PlatProdFormSteps}
         formikInitialValues={PlatProdFormInitialValues}
       />
     ),
@@ -29,7 +29,7 @@ export const prepareStageForms = (stage: EStages) => [
       <Questionnaire
         title={"Developer Relations"}
         formStage={stage}
-        steps={DevFlowFormSteps}
+        prepareSteps={DevFlowFormSteps}
         formikInitialValues={DevFlowFormInitialValues}
       />
     ),
@@ -41,7 +41,7 @@ export const prepareStageForms = (stage: EStages) => [
       <Questionnaire
         title={"Monitoramento"}
         formStage={stage}
-        steps={PlatProdFormSteps}
+        prepareSteps={PlatProdFormSteps}
         formikInitialValues={PlatProdFormInitialValues}
       />
     ),
@@ -53,7 +53,7 @@ export const prepareStageForms = (stage: EStages) => [
       <Questionnaire
         title={"Fluxo do Desenvolvedor"}
         formStage={stage}
-        steps={PlatProdFormSteps}
+        prepareSteps={PlatProdFormSteps}
         formikInitialValues={PlatProdFormInitialValues}
       />
     ),
