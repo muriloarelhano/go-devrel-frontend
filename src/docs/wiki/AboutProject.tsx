@@ -5,16 +5,20 @@ import { Link } from "react-router-dom";
 export const AboutProject: React.FC = () => {
   return (
     <>
-      <Heading>Conhecendo o projeto GoDevrel</Heading>
+      <Heading>Conhecendo o projeto</Heading>
       <Text>
         Esse projeto foi inspirado pelo Professor e Dr. Awndren Fontão,
         baseando-se em sua tese para ajudar profissionais de{" "}
         <i>Developer Relations</i>.
       </Text>
-      <Heading>Como tirar proveito da plataforma</Heading>
       <Text>
-        Primeiramente começe a ler e aprender mais sobre o modelo a aba{" "}
-        <Link to={"/model"}>`Modelos`</Link>.
+        Primeiramente comece a ler e aprender mais sobre o modelo na aba{" "}
+        <Link style={{ color: "lightblue" }} to={"/model"}>
+          Modelos
+        </Link>
+        , após isso juntando o conhecimento aprendido com sua experiencia, dê um
+        feedback na aba de formulários, para que possamos melhor continuamente o
+        modelo.
       </Text>
     </>
   );

@@ -12,6 +12,7 @@ import { Sidebar } from "./Sidebar";
 import { SidebarItem } from "./SidebarItem";
 import { Summary } from "./Summary";
 import { WikiButtons } from "./WikiButtons";
+import { Prose } from "@nikolovlazar/chakra-ui-prose";
 
 export interface WikiProps {
   items: SidebarItem[];
@@ -67,15 +68,15 @@ export const Wiki: React.FC<WikiProps> = ({ items, format }) => {
   return (
     <Container maxW={"80vw"}>
       <Grid
-        gap={12}
+        gap={10}
         my={8}
-        gridTemplateColumns={format === "wiki" ? "0.5fr 4fr 1fr" : "1fr 4fr"}
+        gridTemplateColumns={format === "wiki" ? "0.5fr 5fr 1fr" : "1fr 4fr"}
         templateAreas={
           format === "wiki"
             ? `"sidebar content summary"
-          "sidebar buttons summary"`
+              "sidebar buttons summary"`
             : `"sidebar content"
-         "sidebar buttons"`
+              "sidebar buttons"`
         }
       >
         <GridItem area={"sidebar"}>
@@ -91,8 +92,12 @@ export const Wiki: React.FC<WikiProps> = ({ items, format }) => {
           overflowY={"auto"}
           className={style.sideBar}
         >
-          <Stack direction={"column"} gap={2}>
-            {currentPageComponent}
+          <Stack direction={"column"} gap={2} pt={-10}>
+            {format === "wiki" ? (
+              <Prose> {currentPageComponent}</Prose>
+            ) : (
+              currentPageComponent
+            )}
           </Stack>
         </GridItem>
         {format === "wiki" ? (
