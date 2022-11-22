@@ -8,7 +8,7 @@ export function WikiPage() {
   return (
     <>
       <HeaderMenu />
-      <Wiki items={wikiPageItems}></Wiki>
+      <Wiki items={wikiPageItems} format={"wiki"} />
       <Footer />
     </>
   );
