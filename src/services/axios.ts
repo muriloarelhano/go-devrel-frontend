@@ -1,5 +1,5 @@
-import axios from 'axios'
+import axios from "axios";
 
-const http = axios.create({ baseURL: 'https://godevrel.herokuapp.com' })
+const http = axios.create({ baseURL: "https://godevrel.herokuapp.com" });
 
-export default http
+export default http;

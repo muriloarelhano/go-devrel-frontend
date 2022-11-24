@@ -19,7 +19,12 @@ export const ModelDoc: React.FC = () => {
         da estrutura do modelo têm sido abordados, ajudando a identificar lições
         aprendidas e favorecendo a colaboração e a competitividade. Dessa forma,
         elas poderão obter uma visão sobre a adequação do seu modelo de
-        governança de desenvolvedores.
+        governança de desenvolvedores. Na Figura 16, é apresentada a estrutura
+        do modelo de DEVGO e um conjunto de lições aprendidas baseadas na
+        experiência de profissionais de DevRel (Developer Relations). O modelo
+        DevGo, com exceção do conjunto de lições aprendidas e os marcos que são
+        descritos de forma textual, é apresentado na Figura 17. A descrição dos
+        elementos que compõem o modelo é abordada mais a frente.
       </Text>
       <Text>
         Na Figura 16, é apresentada a estrutura do modelo de DEVGO e um conjunto
