@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, HStack, FormControl, FormLabel, Input, ModalBody, ModalFooter, FormErrorMessage } from "@chakra-ui/react"
-import { CreateUser } from "../../interfaces/createUser";
+import { CreateUser } from "../../interfaces/CreateUser";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import InputMask from "react-input-mask";

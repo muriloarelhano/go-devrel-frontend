@@ -1,4 +1,4 @@
-import { CreateUser } from '../interfaces/createUser';
+import { CreateUser } from '../interfaces/CreateUser';
 import http from './axios';
 
 export async function getUser() {

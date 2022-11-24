@@ -1,8 +1,15 @@
-import { Button, Stack, useColorMode, useDisclosure } from "@chakra-ui/react";
+import {
+  Button,
+  Stack,
+  Text,
+  useColorMode,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import React from "react";
+import React, { useContext } from "react";
 import ModalForm from "../ModalForm/ModalForm";
 import { FaMoon, FaSun } from "react-icons/fa";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const NavBarItems: React.FunctionComponent<{
   menuIsOpen: boolean;
@@ -10,6 +17,7 @@ const NavBarItems: React.FunctionComponent<{
 }> = ({ menuIsOpen, toggle }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
+  const { authenticated, userInfo } = useContext(AuthContext);
 
   return (
     <Stack
@@ -35,9 +43,18 @@ const NavBarItems: React.FunctionComponent<{
 
       <Link to="/wiki">Wiki</Link>
 
-      <Button variant="solid" onClick={onOpen} colorScheme="teal">
-        Entrar
-      </Button>
+      {authenticated && userInfo ? (
+        <>
+          <Text>
+            {/*@ts-ignore*/}
+            {userInfo.first_name} {userInfo.last_name}
+          </Text>
+        </>
+      ) : (
+        <Button variant="solid" onClick={onOpen} colorScheme="teal">
+          Entrar
+        </Button>
+      )}
 
       <ModalForm onClose={onClose} isOpen={isOpen}></ModalForm>
 
