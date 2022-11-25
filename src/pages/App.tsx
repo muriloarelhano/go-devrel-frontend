@@ -1,10 +1,11 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+
 import Forms from "./Forms";
 import Home from "./Home";
 import Model from "./Model";
 import { WikiPage } from "./Wiki";
 
-const App = () => {
+export const App = () => {
   return (
     <BrowserRouter>
       <Routes>
@@ -18,4 +19,3 @@ const App = () => {
   );
 };
 
-export default App;

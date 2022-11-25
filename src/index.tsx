@@ -1,11 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./pages/App";
+import { App } from "./pages/App";
 import reportWebVitals from "./reportWebVitals";
 import { ChakraProvider, ColorModeScript, extendTheme } from "@chakra-ui/react";
 import { StepsStyleConfig } from "chakra-ui-steps";
 
 import { withProse } from "@nikolovlazar/chakra-ui-prose";
+import { AuthProvider } from "./contexts/AuthContext";
 
 const theme = extendTheme(
   {
@@ -23,12 +24,12 @@ const theme = extendTheme(
   withProse()
 );
 ReactDOM.render(
-  <React.StrictMode>
-    <ChakraProvider theme={theme}>
-      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+  <ChakraProvider theme={theme}>
+    <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+    <AuthProvider>
       <App />
-    </ChakraProvider>
-  </React.StrictMode>,
+    </AuthProvider>
+  </ChakraProvider>,
   document.getElementById("root")
 );
 
