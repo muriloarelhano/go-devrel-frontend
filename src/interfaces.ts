@@ -25,3 +25,15 @@ export interface StageFormValues {
   formIdentifier: EFormIdentifiers;
   responses: FormResponse;
 }
+
+export interface UserInfo {
+  email: string;
+  first_name: string;
+  last_name: string;
+  phone?: number;
+  birthdate?: string;
+  isEmailValidated: boolean;
+  exp: number;
+  iat: number;
+  sub: string;
+}
