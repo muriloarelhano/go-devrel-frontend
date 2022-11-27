@@ -25,7 +25,7 @@ const NavBarItems: React.FunctionComponent<{
       display={{ base: menuIsOpen ? "flex" : "none", lg: "flex" }}
       paddingY="15px"
       direction={{ base: "column", md: "row" }}
-      flexBasis={{ base: "100%", lg: "60%" }}
+      flexBasis={{ base: "100%", lg: "50%" }}
       alignItems={{ base: "flex-start", md: "center" }}
       p={menuIsOpen ? "26px 12px" : "0"}
       justify="space-between"

@@ -6,6 +6,7 @@ import { UserInfo } from "../interfaces";
 import { LoginInterface } from "../interfaces/login";
 import http from "../services/axios";
 import {
+  getTokensFromStorage,
   setTokensOnStorage,
   unsetTokensFromStorage,
 } from "../utils/authTokens";
@@ -17,12 +18,11 @@ export function useAuth() {
   const toast = useToast();
 
   useEffect(() => {
-    const refreshToken = localStorage.getItem("refresh_token");
-    const token = localStorage.getItem("id_token");
+    const { idToken, refreshToken } = getTokensFromStorage();
 
-    if (token) {
+    if (idToken) {
       http.interceptors.request.use((config) => {
-        config.headers!["Authorization"] = `Bearer ${JSON.parse(token)}`;
+        config.headers!["Authorization"] = `Bearer ${idToken}`;
         return config;
       });
       setAuthenticated(true);
@@ -41,7 +41,7 @@ export function useAuth() {
       } = await http.get("/auth/login", { params: { ...payload } });
       setTokensOnStorage(id_token, refresh_token);
       http.interceptors.request.use((config) => {
-        config.headers!["Authorization"] = `Bearer ${id_token}`;
+        config.headers!["Authorization"] = `Bearer ${JSON.parse(id_token)}`;
         return config;
       });
       setUserInfo(JSON.parse(atob(id_token.split(".")[1])));
@@ -92,21 +92,21 @@ export function useAuth() {
   }
 
   async function refresh() {
-    const refreshToken = localStorage.getItem("refresh_token");
-    const token = localStorage.getItem("id_token");
-    if (refreshToken && token) {
+    const { idToken, refreshToken } = getTokensFromStorage();
+
+    if (idToken && refreshToken) {
       try {
         const { id_token, refresh_token } = (
           await http.get("auth/refresh", {
             params: {
-              id_token: token,
+              id_token: idToken,
               refresh_token: refreshToken,
             },
           })
         ).data;
         setTokensOnStorage(id_token, refresh_token);
         http.interceptors.request.use((config) => {
-          config.headers!["Authorization"] = `Bearer ${id_token}`;
+          config.headers!["Authorization"] = `Bearer ${JSON.parse(id_token)}`;
           return config;
         });
         setUserInfo(JSON.parse(atob(id_token.split(".")[1])));

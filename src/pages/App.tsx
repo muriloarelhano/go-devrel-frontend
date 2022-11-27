@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
+import { AuthContext } from "../contexts/AuthContext";
+
 import { AccountDashboard } from "./account/Dashboard";
 
 import Forms from "./Forms";
@@ -9,7 +10,7 @@ import Model from "./Model";
 import { WikiPage } from "./Wiki";
 
 export const App = () => {
-  const { authenticated, refresh } = useAuth();
+  const { authenticated, refresh } = useContext(AuthContext);
   useEffect(() => {
     refresh();
   });
