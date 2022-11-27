@@ -1,13 +1,18 @@
 import { useToast } from "@chakra-ui/react";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { ErrosEnum } from "../errors";
+import { ErrosEnum } from "../utils/errors";
+import { UserInfo } from "../interfaces";
 import { LoginInterface } from "../interfaces/login";
 import http from "../services/axios";
+import {
+  setTokensOnStorage,
+  unsetTokensFromStorage,
+} from "../utils/authTokens";
 
 export function useAuth() {
   const [authenticated, setAuthenticated] = useState(false);
-  const [userInfo, setUserInfo] = useState<unknown | null>(null);
+  const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
   const [loading, setLoading] = useState(true);
   const toast = useToast();
 
@@ -34,13 +39,11 @@ export function useAuth() {
       const {
         data: { id_token, refresh_token },
       } = await http.get("/auth/login", { params: { ...payload } });
-      localStorage.setItem("id_token", JSON.stringify(id_token));
-      localStorage.setItem("refresh_token", JSON.stringify(refresh_token));
+      setTokensOnStorage(id_token, refresh_token);
       http.interceptors.request.use((config) => {
         config.headers!["Authorization"] = `Bearer ${id_token}`;
         return config;
       });
-      console.log(JSON.parse(atob(id_token.split(".")[1])))
       setUserInfo(JSON.parse(atob(id_token.split(".")[1])));
       setAuthenticated(true);
 
@@ -79,14 +82,59 @@ export function useAuth() {
 
   function handleLogout(): void {
     setAuthenticated(false);
-    localStorage.removeItem("id_token");
-    localStorage.removeItem("refresh_token");
+    unsetTokensFromStorage();
     http.interceptors.request.use((config) => {
       //@ts-ignore
       config.headers["Authorization"] = undefined;
       return config;
     });
+    setUserInfo(null);
   }
 
-  return { authenticated, loading, handleLogin, handleLogout, userInfo };
+  async function refresh() {
+    const refreshToken = localStorage.getItem("refresh_token");
+    const token = localStorage.getItem("id_token");
+    if (refreshToken && token) {
+      try {
+        const { id_token, refresh_token } = (
+          await http.get("auth/refresh", {
+            params: {
+              id_token: token,
+              refresh_token: refreshToken,
+            },
+          })
+        ).data;
+        setTokensOnStorage(id_token, refresh_token);
+        http.interceptors.request.use((config) => {
+          config.headers!["Authorization"] = `Bearer ${id_token}`;
+          return config;
+        });
+        setUserInfo(JSON.parse(atob(id_token.split(".")[1])));
+        setAuthenticated(true);
+      } catch (error) {
+        if (axios.isAxiosError(error)) {
+          toast({
+            //@ts-ignore
+            title: error.response?.data,
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
+        }
+      }
+    } else {
+      unsetTokensFromStorage();
+      setUserInfo(null);
+      setAuthenticated(false);
+    }
+  }
+
+  return {
+    authenticated,
+    loading,
+    userInfo,
+    handleLogin,
+    handleLogout,
+    refresh,
+  };
 }

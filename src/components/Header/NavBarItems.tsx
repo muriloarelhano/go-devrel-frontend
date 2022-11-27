@@ -4,6 +4,7 @@ import {
   Text,
   useColorMode,
   useDisclosure,
+  VStack,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import React, { useContext } from "react";
@@ -24,7 +25,7 @@ const NavBarItems: React.FunctionComponent<{
       display={{ base: menuIsOpen ? "flex" : "none", lg: "flex" }}
       paddingY="15px"
       direction={{ base: "column", md: "row" }}
-      flexBasis={{ base: "100%", lg: "40%" }}
+      flexBasis={{ base: "100%", lg: "60%" }}
       alignItems={{ base: "flex-start", md: "center" }}
       p={menuIsOpen ? "26px 12px" : "0"}
       justify="space-between"
@@ -45,10 +46,12 @@ const NavBarItems: React.FunctionComponent<{
 
       {authenticated && userInfo ? (
         <>
-          <Text>
-            {/*@ts-ignore*/}
-            {userInfo.first_name} {userInfo.last_name}
-          </Text>
+          <VStack align={"start"}>
+            <Text fontSize={"sm"} fontWeight={"medium"}>
+              {userInfo.first_name} {userInfo.last_name}
+            </Text>
+            <Link to="/dashboard">Minha Conta</Link>
+          </VStack>
         </>
       ) : (
         <Button variant="solid" onClick={onOpen} colorScheme="teal">
