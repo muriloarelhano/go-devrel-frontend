@@ -1,5 +1,5 @@
 import axios from "axios";
 
-const http = axios.create({ baseURL: "https://godevrel.herokuapp.com" });
+const http = axios.create({ baseURL: "https://godevrelbackend.fly.dev" });
 
 export default http;
