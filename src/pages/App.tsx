@@ -10,7 +10,7 @@ import Model from "./Model";
 import { WikiPage } from "./Wiki";
 
 export const App = () => {
-  const { authenticated, refresh } = useContext(AuthContext);
+  const { refresh } = useContext(AuthContext);
   useEffect(() => {
     refresh();
   }, []);
@@ -22,11 +22,7 @@ export const App = () => {
         <Route path="/my-stage" element={<Home />} />
         <Route path="/forms" element={<Forms />} />
         <Route path="/wiki" element={<WikiPage />} />
-        {authenticated ? (
-          <Route path="/dashboard" element={<AccountDashboard />} />
-        ) : (
-          <Route path="/" />
-        )}
+        <Route path="/dashboard" element={<AccountDashboard />} />
       </Routes>
     </BrowserRouter>
   );
