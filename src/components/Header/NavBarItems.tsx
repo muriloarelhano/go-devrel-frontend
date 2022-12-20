@@ -18,7 +18,7 @@ const NavBarItems: React.FunctionComponent<{
 }> = ({ menuIsOpen, toggle }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
-  const { authenticated, userInfo } = useContext(AuthContext);
+  const { authenticated, userInfo, handleLogout } = useContext(AuthContext);
 
   return (
     <Stack
@@ -52,6 +52,7 @@ const NavBarItems: React.FunctionComponent<{
             </Text>
             <Link to="/dashboard">Minha Conta</Link>
           </VStack>
+          <Button onClick={handleLogout}>Sair</Button>
         </>
       ) : (
         <Button variant="solid" onClick={onOpen} colorScheme="teal">

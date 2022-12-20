@@ -13,7 +13,7 @@ export const App = () => {
   const { authenticated, refresh } = useContext(AuthContext);
   useEffect(() => {
     refresh();
-  });
+  }, []);
   return (
     <BrowserRouter>
       <Routes>

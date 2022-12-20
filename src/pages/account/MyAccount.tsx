@@ -6,27 +6,63 @@ import {
   GridItem,
   Heading,
   Input,
+  useToast,
   VStack,
 } from "@chakra-ui/react";
 import { useFormik } from "formik";
-import React, { useContext } from "react";
+import { DateTime } from "luxon";
+import React, { useContext, useEffect } from "react";
+import ReactInputMask from "react-input-mask";
 import { AuthContext } from "../../contexts/AuthContext";
 import { UpdateUser } from "../../interfaces/user/UpdateUser";
 import { updateUser } from "../../services/userService";
 
+function normalizePhone(phone: string) {
+  try {
+    return phone.replace(/[^0-9]/g, "");
+  } catch (e) {
+    console.error("error to normalizer phone number");
+  }
+}
+
 export const MyAccount: React.FC = () => {
-  const { userInfo } = useContext(AuthContext);
+  const { userInfo, refresh } = useContext(AuthContext);
+  const toast = useToast();
+
+  useEffect(()=>{
+    console.log(userInfo)
+  }, [userInfo])
 
   const formik = useFormik<UpdateUser>({
     initialValues: {
       first_name: userInfo ? userInfo.first_name : "",
       last_name: userInfo ? userInfo.last_name : "",
       phone: userInfo ? (userInfo.phone ? String(userInfo.phone) : "") : "",
-      birthdate: userInfo ? (userInfo.birthdate ? userInfo.birthdate : "") : "",
+      birthdate: userInfo
+        ? userInfo.birthdate
+          ? DateTime.fromISO(userInfo.birthdate).toISODate()
+          : ""
+        : "",
     },
-    onSubmit: (values: UpdateUser) => {
-      console.log(values);
-      updateUser(values);
+    onSubmit: async (values: UpdateUser) => {
+      if (values.phone) {
+        values.phone = normalizePhone(values.phone);
+      }
+
+      try {
+        await updateUser(values);
+        toast({
+          status: "success",
+          title: "Dados atualizados com sucesso",
+        });
+        refresh()
+      } catch (error) {
+        toast({
+          status: "error",
+          title: "Ocorreu um erro ao atualizar os dados",
+          description: "tente contatar o suporte da plataforma",
+        });
+      }
     },
   });
 
@@ -67,9 +103,11 @@ export const MyAccount: React.FC = () => {
             <FormControl>
               <FormLabel>Telefone</FormLabel>
               <Input
+                as={ReactInputMask}
+                mask={"(**)*****-****"}
                 id="phone"
                 name="phone"
-                type="text"
+                type="tel"
                 onChange={formik.handleChange}
                 value={formik.values.phone}
               />

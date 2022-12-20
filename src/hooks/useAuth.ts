@@ -40,13 +40,14 @@ export function useAuth() {
         data: { id_token, refresh_token },
       } = await http.get("/auth/login", { params: { ...payload } });
       setTokensOnStorage(id_token, refresh_token);
+      console.log(id_token)
       http.interceptors.request.use((config) => {
-        config.headers!["Authorization"] = `Bearer ${JSON.parse(id_token)}`;
+        config.headers!["Authorization"] = `Bearer ${id_token}`;
         return config;
       });
       setUserInfo(JSON.parse(atob(id_token.split(".")[1])));
-      setAuthenticated(true);
-
+      setAuthenticated(true)
+      
       toast({
         title: "Usuário logado com sucesso",
         status: "success",
@@ -89,6 +90,7 @@ export function useAuth() {
       return config;
     });
     setUserInfo(null);
+    window.location.replace('/')
   }
 
   async function refresh() {
@@ -106,7 +108,7 @@ export function useAuth() {
         ).data;
         setTokensOnStorage(id_token, refresh_token);
         http.interceptors.request.use((config) => {
-          config.headers!["Authorization"] = `Bearer ${JSON.parse(id_token)}`;
+          config.headers!["Authorization"] = `Bearer ${id_token}`;
           return config;
         });
         setUserInfo(JSON.parse(atob(id_token.split(".")[1])));
