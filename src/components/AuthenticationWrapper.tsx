@@ -2,7 +2,9 @@ import React, { useContext } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 
 export const AuthenticationWrapper: React.FC = ({ children }) => {
-  const { authenticated } = useContext(AuthContext);
+  const { authenticated, userInfo } = useContext(AuthContext);
 
-  return <>{authenticated ? children : window.location.replace("/")}</>;
+  return (
+    <>{authenticated && userInfo ? children : window.location.replace("/")}</>
+  );
 };

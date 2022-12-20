@@ -11,6 +11,7 @@ import React, { useContext } from "react";
 import ModalForm from "../ModalForm/ModalForm";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { AuthContext } from "../../contexts/AuthContext";
+import { NavBarUserButtons } from "./UserMenu";
 
 const NavBarItems: React.FunctionComponent<{
   menuIsOpen: boolean;
@@ -45,15 +46,7 @@ const NavBarItems: React.FunctionComponent<{
       <Link to="/wiki">Wiki</Link>
 
       {authenticated && userInfo ? (
-        <>
-          <VStack align={"start"}>
-            <Text fontSize={"sm"} fontWeight={"medium"}>
-              {userInfo.first_name} {userInfo.last_name}
-            </Text>
-            <Link to="/dashboard">Minha Conta</Link>
-          </VStack>
-          <Button onClick={handleLogout}>Sair</Button>
-        </>
+        <NavBarUserButtons />
       ) : (
         <Button variant="solid" onClick={onOpen} colorScheme="teal">
           Entrar

@@ -40,7 +40,7 @@ export const MyAccount: React.FC = () => {
       phone: userInfo ? (userInfo.phone ? String(userInfo.phone) : "") : "",
       birthdate: userInfo
         ? userInfo.birthdate
-          ? DateTime.fromISO(userInfo.birthdate).toISODate()
+          ? DateTime.fromISO(userInfo.birthdate).setZone('utc').toISODate()
           : ""
         : "",
     },
