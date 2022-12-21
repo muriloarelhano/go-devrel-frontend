@@ -8,7 +8,7 @@ export async function getUser() {
     return response;
   } catch (error) {
     console.error(error);
-    throw error
+    throw error;
   }
 }
 
@@ -18,7 +18,7 @@ export async function createUser(data: CreateUser) {
     return response.data;
   } catch (error) {
     console.error(error);
-    throw error
+    throw error;
   }
 }
 
@@ -27,7 +27,7 @@ export async function updateUser(data: UpdateUser) {
     return await http.put("/user", data);
   } catch (error) {
     console.error(error);
-    throw error
+    throw error;
   }
 }
 
@@ -36,6 +36,18 @@ export async function deleteUser() {
     await http.delete("/user");
   } catch (error) {
     console.error(error);
-    throw error
+    throw error;
+  }
+}
+
+export async function resetPassword(data: {
+  password: string;
+  newPassword: string;
+}) {
+  try {
+    await http.put("/user/reset-password", data);
+  } catch (error) {
+    console.error(error);
+    throw error;
   }
 }

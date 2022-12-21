@@ -7,11 +7,11 @@ import {
   Heading,
   Input,
   useToast,
-  VStack,
+  VStack
 } from "@chakra-ui/react";
 import { useFormik } from "formik";
 import { DateTime } from "luxon";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import ReactInputMask from "react-input-mask";
 import { AuthContext } from "../../contexts/AuthContext";
 import { UpdateUser } from "../../interfaces/user/UpdateUser";
@@ -28,10 +28,6 @@ function normalizePhone(phone: string) {
 export const MyAccount: React.FC = () => {
   const { userInfo, refresh } = useContext(AuthContext);
   const toast = useToast();
-
-  useEffect(()=>{
-    console.log(userInfo)
-  }, [userInfo])
 
   const formik = useFormik<UpdateUser>({
     initialValues: {

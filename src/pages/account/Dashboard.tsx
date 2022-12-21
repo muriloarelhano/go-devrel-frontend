@@ -10,6 +10,7 @@ import React from "react";
 import { AuthenticationWrapper } from "../../components/AuthenticationWrapper";
 import HeaderMenu from "../../components/Header/Header";
 import Footer from "../../components/home/Footer";
+import { ChangePassword } from "./ChangePassword";
 import { MyAccount } from "./MyAccount";
 
 export const AccountDashboard: React.FC = () => {
@@ -26,7 +27,7 @@ export const AccountDashboard: React.FC = () => {
           </TabList>
           <TabPanels>
             <TabPanel>{<MyAccount />}</TabPanel>
-            <TabPanel></TabPanel>
+            <TabPanel>{<ChangePassword/>}</TabPanel>
             <TabPanel></TabPanel>
             <TabPanel></TabPanel>
           </TabPanels>

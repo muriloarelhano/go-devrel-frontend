@@ -10,19 +10,33 @@ import Model from "./Model";
 import { WikiPage } from "./Wiki";
 
 export const App = () => {
-  const { refresh } = useContext(AuthContext);
+  const { authenticated, refresh } = useContext(AuthContext);
+
   useEffect(() => {
     refresh();
+    var id = window.setTimeout(function () {}, 0);
+    while (id--) window.clearTimeout(id);
+    setTimeout(() => {
+      refresh();
+    }, 5000);
   }, []);
+
+
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/model" element={<Model />} />
         <Route path="/my-stage" element={<Home />} />
-        <Route path="/forms" element={<Forms />} />
+        {authenticated ? (
+          <>
+            <Route path="/forms" element={<Forms />} />
+            <Route path="/dashboard" element={<AccountDashboard />} />
+          </>
+        ) : (
+          ""
+        )}
         <Route path="/wiki" element={<WikiPage />} />
-        <Route path="/dashboard" element={<AccountDashboard />} />
       </Routes>
     </BrowserRouter>
   );

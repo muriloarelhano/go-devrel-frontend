@@ -40,14 +40,13 @@ export function useAuth() {
         data: { id_token, refresh_token },
       } = await http.get("/auth/login", { params: { ...payload } });
       setTokensOnStorage(id_token, refresh_token);
-      console.log(id_token)
       http.interceptors.request.use((config) => {
         config.headers!["Authorization"] = `Bearer ${id_token}`;
         return config;
       });
       setUserInfo(JSON.parse(atob(id_token.split(".")[1])));
-      setAuthenticated(true)
-      
+      setAuthenticated(true);
+
       toast({
         title: "Usuário logado com sucesso",
         status: "success",
@@ -62,7 +61,6 @@ export function useAuth() {
         return config;
       });
       if (axios.isAxiosError(err)) {
-        console.log(err.response!.data);
         if (
           ErrosEnum.ERROR_INVALID_CREDENTIALS ===
           //@ts-ignore
@@ -90,7 +88,7 @@ export function useAuth() {
       return config;
     });
     setUserInfo(null);
-    window.location.replace('/')
+    window.location.replace("/");
   }
 
   async function refresh() {
