@@ -5,8 +5,10 @@ import {
   FormLabel,
   Heading,
   Input,
+  useToast,
   VStack,
 } from "@chakra-ui/react";
+import axios from "axios";
 import { useFormik } from "formik";
 import { resetPassword } from "../../services/userService";
 
@@ -16,13 +18,30 @@ export interface ResetPasswordValues {
 }
 
 export const ChangePassword = () => {
+  const toast = useToast();
   const formik = useFormik<ResetPasswordValues>({
     initialValues: {
       password: "",
       newPassword: "",
     },
     onSubmit: async (values: ResetPasswordValues) => {
-      resetPassword(values);
+      try {
+        await resetPassword(values);
+        toast({
+          isClosable: true,
+          status: "success",
+          title: "Senha alterada com sucesso",
+        });
+      } catch (error) {
+        if (axios.isAxiosError(error)) {
+          toast({
+            isClosable: true,
+            status: "error",
+            title: "Erro ao alterar a senha",
+            description: (error.response?.data as any).description.message,
+          });
+        }
+      }
     },
   });
 
@@ -31,7 +50,7 @@ export const ChangePassword = () => {
       <VStack align={"flex-start"} gap={8} maxW={"xs"}>
         <Heading fontSize={"x-large"}>Mudar Senha</Heading>
         <FormControl>
-          <FormLabel>Nova Senha</FormLabel>
+          <FormLabel>Senha Antiga</FormLabel>
           <Input
             id="password"
             name="password"
@@ -41,7 +60,7 @@ export const ChangePassword = () => {
           />
         </FormControl>
         <FormControl>
-          <FormLabel>Confirmação de Senha</FormLabel>
+          <FormLabel>Nova Senha</FormLabel>
           <Input
             id="newPassword"
             name="newPassword"
