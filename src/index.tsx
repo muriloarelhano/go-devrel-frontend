@@ -7,6 +7,7 @@ import { StepsStyleConfig } from "chakra-ui-steps";
 
 import { withProse } from "@nikolovlazar/chakra-ui-prose";
 import { AuthProvider } from "./contexts/AuthContext";
+import { HeaderFormProvider } from "./contexts/HeaderFormContext";
 
 const theme = extendTheme(
   {
@@ -27,7 +28,9 @@ ReactDOM.render(
   <ChakraProvider theme={theme}>
     <ColorModeScript initialColorMode={theme.config.initialColorMode} />
     <AuthProvider>
-      <App />
+      <HeaderFormProvider>
+        <App />
+      </HeaderFormProvider>
     </AuthProvider>
   </ChakraProvider>,
   document.getElementById("root")

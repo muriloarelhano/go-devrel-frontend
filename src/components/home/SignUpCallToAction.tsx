@@ -1,7 +1,12 @@
-import { Box, Flex, Heading, HStack, Button, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, HStack, Text } from "@chakra-ui/react";
+import { useContext } from "react";
 import SignUpImage from "../../assets/images/signUp.svg";
+import { AuthContext } from "../../contexts/AuthContext";
+import { HeaderFormContext } from "../../contexts/HeaderFormContext";
 
 const SignUpCallToAction = () => {
+  const { onOpen } = useContext(HeaderFormContext);
+  const { authenticated } = useContext(AuthContext);
   return (
     <Flex
       justifyItems="space-between"
@@ -29,9 +34,13 @@ const SignUpCallToAction = () => {
             contribua
           </Text>
         </HStack>
-        <Button colorScheme="teal">
-          <Text fontFamily="Inter">Cadastrar-se</Text>
-        </Button>
+        {authenticated ? (
+          ""
+        ) : (
+          <Button colorScheme="teal" onClick={onOpen}>
+            <Text fontFamily="Inter">Cadastrar-se</Text>
+          </Button>
+        )}
       </Box>
       <Box flex="0 0 45%" pt={{ base: "20", lg: "0" }}>
         <img src={SignUpImage} alt="" />

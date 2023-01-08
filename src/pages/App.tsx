@@ -13,8 +13,14 @@ export const App = () => {
   const { authenticated, refresh } = useContext(AuthContext);
 
   useEffect(() => {
-    refresh();
-  }, []);
+    if (authenticated) {
+      setInterval(() => {
+        refresh();
+      }, 10000);
+    } else {
+      refresh();
+    }
+  }, [authenticated]);
 
   return (
     <BrowserRouter>

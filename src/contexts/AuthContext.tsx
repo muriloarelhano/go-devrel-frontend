@@ -9,7 +9,7 @@ export interface AuthContextProps {
   userInfo: UserInfo | null;
   handleLogin: (payload: LoginInterface) => Promise<void>;
   handleLogout: () => void;
-  refresh: () => void;
+  refresh: () => Promise<void>;
 }
 
 //@ts-ignore

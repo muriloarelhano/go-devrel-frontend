@@ -20,7 +20,6 @@ const Footer = () => {
 
                 </Stack>
             </Container>
-
         </Container>
     )
 }

@@ -1,12 +1,12 @@
 import {
   Button,
-  Stack, useColorMode,
-  useDisclosure
+  Stack, useColorMode
 } from "@chakra-ui/react";
 import React, { useContext } from "react";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
+import { HeaderFormContext } from "../../contexts/HeaderFormContext";
 import ModalForm from "../ModalForm/ModalForm";
 import { NavBarUserButtons } from "./UserMenu";
 
@@ -14,7 +14,7 @@ const NavBarItems: React.FunctionComponent<{
   menuIsOpen: boolean;
   toggle: any;
 }> = ({ menuIsOpen, toggle }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onOpen, onClose } = useContext(HeaderFormContext)
   const { colorMode, toggleColorMode } = useColorMode();
   const { authenticated, userInfo } = useContext(AuthContext);
 

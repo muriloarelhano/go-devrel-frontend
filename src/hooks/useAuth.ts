@@ -54,10 +54,9 @@ export function useAuth() {
         isClosable: true,
       });
 
-      setTimeout(() => {
+      setInterval(() => {
         refresh();
-      }, 5000);
-
+      }, 10000);
     } catch (err: any) {
       let errorMessage = "Ocorreu um erro ao realizar o login";
       http.interceptors.request.use((config) => {
