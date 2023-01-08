@@ -94,7 +94,7 @@ export const Wiki: React.FC<WikiProps> = ({ items, format }) => {
         >
           <Stack direction={"column"} gap={2} pt={-10}>
             {format === "wiki" ? (
-              <Prose> {currentPageComponent}</Prose>
+              <Prose marginTop={-12}> {currentPageComponent}</Prose>
             ) : (
               currentPageComponent
             )}

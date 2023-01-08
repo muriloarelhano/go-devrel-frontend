@@ -32,11 +32,11 @@ const NavBarItems: React.FunctionComponent<{
       fontWeight="semibold"
       fontSize={menuIsOpen ? "lg" : ""}
     >
+      <Link to="/my-stage">Meu Estágio</Link>
+
       <Link to="/model" onClick={() => toggle()}>
         Modelo
       </Link>
-
-      <Link to="/my-stage">Meu Estágio</Link>
 
       <Link to="/wiki">Wiki</Link>
 
