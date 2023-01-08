@@ -53,6 +53,11 @@ export function useAuth() {
         duration: 9000,
         isClosable: true,
       });
+
+      setTimeout(() => {
+        refresh();
+      }, 5000);
+
     } catch (err: any) {
       let errorMessage = "Ocorreu um erro ao realizar o login";
       http.interceptors.request.use((config) => {

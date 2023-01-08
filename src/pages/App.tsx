@@ -14,13 +14,7 @@ export const App = () => {
 
   useEffect(() => {
     refresh();
-    var id = window.setTimeout(function () {}, 0);
-    while (id--) window.clearTimeout(id);
-    setTimeout(() => {
-      refresh();
-    }, 5000);
   }, []);
-
 
   return (
     <BrowserRouter>
