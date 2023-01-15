@@ -1,5 +1,6 @@
 import { UseToastOptions } from "@chakra-ui/react";
 import axios from "axios";
+import { ExportFormByDateDto } from "../interfaces/forms/api";
 import http from "./axios";
 
 export const sendFormResponse = async (
@@ -25,7 +26,7 @@ export const sendFormResponse = async (
       });
     } else {
       toast({
-        title: "Algo de errado não está certo",
+        title: "Ocorreu algum problema com sua requisição",
         status: "error",
         isClosable: true,
       });
@@ -34,16 +35,18 @@ export const sendFormResponse = async (
   }
 };
 
-export const exportAllForms = async (
+export const exportByDate = async (
+  payload: ExportFormByDateDto,
   toast: (config: UseToastOptions) => void
 ) => {
   try {
-    await http.get("/forms/export");
+    const forms = (await http.get("/forms/export", {params: payload})).data;
     toast({
-      title: "Formulário enviado com sucesso",
+      title: "Exportação concluída",
       status: "success",
       isClosable: true,
     });
+    return forms
   } catch (error: unknown) {
     if (axios.isAxiosError(error)) {
       const errorData = error.response?.data as any;
@@ -55,7 +58,7 @@ export const exportAllForms = async (
       });
     } else {
       toast({
-        title: "Algo de errado não está certo",
+        title: "Ocorreu algum problema com sua requisição",
         status: "error",
         isClosable: true,
       });

@@ -1,23 +1,23 @@
-import React, { useState } from "react";
 import {
   Button,
-  HStack,
   FormControl,
+  FormErrorMessage,
   FormLabel,
+  HStack,
   Input,
   ModalBody,
   ModalFooter,
-  FormErrorMessage,
   useToast,
 } from "@chakra-ui/react";
-import { CreateUser } from "../../interfaces/user/CreateUser";
 import { yupResolver } from "@hookform/resolvers/yup";
+import axios from "axios";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import InputMask from "react-input-mask";
 import { validatePhone } from "validations-br";
 import * as yup from "yup";
+import { CreateUser } from "../../interfaces/user/CreateUser";
 import { createUser } from "../../services/userService";
-import axios from "axios";
 
 const schema = yup.object().shape({
   first_name: yup.string().required("Nome é obrigatório"),
@@ -49,12 +49,11 @@ const SignInContent = () => {
     event.preventDefault();
 
     try {
-      const user = await createUser(values!);
+      await createUser(values!);
       toast({
         status: "success",
         title: "Usuário cadastrado com sucesso.",
       });
-
     } catch (e: any) {
       if (axios.isAxiosError(e)) {
         toast({

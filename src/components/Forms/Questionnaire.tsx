@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { FormikProps, useFormik } from "formik";
-import { StageFormValues } from "../../interfaces";
 import { Step, Steps, useSteps } from "chakra-ui-steps";
 import { sendFormResponse } from "../../services/formService";
 import { Box, Button, Flex, Heading, useToast } from "@chakra-ui/react";
+import { StageFormValues } from "../../interfaces/interfaces";
 
 export interface StepComponentItem {
   label: string;

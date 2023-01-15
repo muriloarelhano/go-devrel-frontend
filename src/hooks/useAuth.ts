@@ -2,7 +2,6 @@ import { useToast } from "@chakra-ui/react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { ErrosEnum } from "../utils/errors";
-import { UserInfo } from "../interfaces";
 import { LoginInterface } from "../interfaces/login";
 import http from "../services/axios";
 import {
@@ -10,6 +9,7 @@ import {
   setTokensOnStorage,
   unsetTokensFromStorage,
 } from "../utils/authTokens";
+import { UserInfo } from "../interfaces/interfaces";
 
 export function useAuth() {
   const [authenticated, setAuthenticated] = useState(false);

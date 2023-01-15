@@ -13,6 +13,11 @@ export enum EFormIdentifiers {
   DEVELOPER_RELATION = "developer-relation",
 }
 
+export enum ExportFormatTypes{
+  CSV = "CSV",
+  JSON = "JSON",
+}
+
 export interface FormResponse {
   [key: string]: {
     otherInformation: string;

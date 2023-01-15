@@ -1,12 +1,13 @@
-import { EFormIdentifiers, EStages } from "../../interfaces";
+
+import { EFormIdentifiers, EStages } from "../../interfaces/interfaces";
 import { Questionnaire } from "./Questionnaire";
 import {
   DevFlowFormInitialValues,
-  DevFlowFormSteps,
+  DevFlowFormSteps
 } from "./QuestionnairesConfig/DevFlow";
 import {
   PlatProdFormInitialValues,
-  PlatProdFormSteps,
+  PlatProdFormSteps
 } from "./QuestionnairesConfig/PlatformAndProducts";
 
 export const prepareStageForms = (stage: EStages) => [

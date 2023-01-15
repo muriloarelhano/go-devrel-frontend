@@ -1,4 +1,5 @@
-import { EStages } from "../../interfaces";
+
+import { EStages } from "../../interfaces/interfaces";
 import { NoContent } from "../Wiki/NoContent";
 import { SidebarItem } from "../Wiki/SidebarItem";
 import { AwarenessStage } from "./Stages/Awareness";

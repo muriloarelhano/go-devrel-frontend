@@ -1,11 +1,11 @@
 import { FormikProps } from "formik";
-import { EFormIdentifiers, StageFormValues } from "../../../interfaces";
 import {
   PlatProdFormStep1,
   PlatProdFormStep2,
   PlatProdFormStep3,
 } from "../QuestionsConfig/PlatformAndProducts";
 import { Questions } from "../Questions";
+import { EFormIdentifiers, StageFormValues } from "../../../interfaces/interfaces";
 
 export const PlatProdFormInitialValues: Partial<StageFormValues> = {
   formIdentifier: EFormIdentifiers.PLATFORM_AND_PRODUCTS,

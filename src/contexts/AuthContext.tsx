@@ -1,6 +1,6 @@
 import React, { createContext } from "react";
 import { useAuth } from "../hooks/useAuth";
-import { UserInfo } from "../interfaces";
+import { UserInfo } from "../interfaces/interfaces";
 import { LoginInterface } from "../interfaces/login";
 
 export interface AuthContextProps {
