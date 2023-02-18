@@ -18,6 +18,7 @@ export const App = () => {
         refresh();
       }, 10000);
     } else {
+      for (var i = 1; i < 100; i++) window.clearInterval(i);
       refresh();
     }
   }, [authenticated]);
