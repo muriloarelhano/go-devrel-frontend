@@ -7,7 +7,7 @@ import {
   Heading,
   Input,
   useToast,
-  VStack
+  VStack,
 } from "@chakra-ui/react";
 import { useFormik } from "formik";
 import { DateTime } from "luxon";
@@ -36,14 +36,16 @@ export const MyAccount: React.FC = () => {
       phone: userInfo ? (userInfo.phone ? String(userInfo.phone) : "") : "",
       birthdate: userInfo
         ? userInfo.birthdate
-          ? DateTime.fromISO(userInfo.birthdate).setZone('utc').toISODate()
-          : ""
-        : "",
+          ? DateTime.fromISO(userInfo.birthdate).setZone("utc").toISODate()
+          : undefined
+        : undefined,
     },
     onSubmit: async (values: UpdateUser) => {
       if (values.phone) {
         values.phone = normalizePhone(values.phone);
       }
+
+      if (!values.birthdate) delete values.birthdate;
 
       try {
         await updateUser(values);
@@ -51,7 +53,7 @@ export const MyAccount: React.FC = () => {
           status: "success",
           title: "Dados atualizados com sucesso",
         });
-        refresh()
+        refresh();
       } catch (error) {
         toast({
           status: "error",
