@@ -39,7 +39,7 @@ const SignInContent = () => {
 
   const {
     register,
-    formState: { errors },
+    formState: { errors, isSubmitting, isValid, isDirty },
   } = useForm<CreateUser>({
     mode: "onBlur",
     resolver: yupResolver(schema),
@@ -54,15 +54,16 @@ const SignInContent = () => {
         status: "success",
         title: "Usuário cadastrado com sucesso.",
       });
-    } catch (e: any) {
-      if (axios.isAxiosError(e)) {
+      window.location.reload();
+    } catch (error: any) {
+      if (axios.isAxiosError(error)) {
         toast({
           status: "error",
           title: "Erro ao cadastrar o usuário.",
           //@ts-ignore
-          description: e.response?.data!.message
+          description: error.response?.data!.message
             ? //@ts-ignore
-              e.response?.data.message
+              error.response?.data.message
             : "",
         });
       } else {
@@ -161,7 +162,12 @@ const SignInContent = () => {
       </ModalBody>
 
       <ModalFooter justifyContent="space-between" flexDir="column" py="4">
-        <Button width="full" colorScheme="teal" type="submit">
+        <Button
+          width="full"
+          colorScheme="teal"
+          type="submit"
+          disabled={isSubmitting || !isDirty || !isValid}
+        >
           Cadastrar
         </Button>
       </ModalFooter>

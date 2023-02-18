@@ -2,8 +2,7 @@
 import { useContext, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
-
-import { AccountDashboard } from "./account/Dashboard";
+import { AccountDashboard } from "./account";
 
 import Forms from "./Forms";
 import Home from "./Home";

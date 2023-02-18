@@ -25,14 +25,14 @@ const theme = extendTheme(
   withProse()
 );
 ReactDOM.render(
-  <AuthProvider>
-    <ChakraProvider theme={theme}>
-      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+  <ChakraProvider theme={theme}>
+    <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+    <AuthProvider>
       <HeaderFormProvider>
         <App />
       </HeaderFormProvider>
-    </ChakraProvider>
-  </AuthProvider>,
+    </AuthProvider>
+  </ChakraProvider>,
   document.getElementById("root")
 );
 

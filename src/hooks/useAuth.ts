@@ -133,7 +133,7 @@ export function useAuth() {
     unsetTokensFromStorage();
     setUserInfo(null);
     setAuthenticated(false);
-    window.location.reload();
+    window.location.replace("/");
   }
 
   return {
