@@ -129,6 +129,13 @@ export function useAuth() {
     }
   }
 
+  function handleDeleteAccount() {
+    unsetTokensFromStorage();
+    setUserInfo(null);
+    setAuthenticated(false);
+    window.location.reload();
+  }
+
   return {
     authenticated,
     loading,
@@ -136,5 +143,6 @@ export function useAuth() {
     handleLogin,
     handleLogout,
     refresh,
+    handleDeleteAccount,
   };
 }

@@ -10,6 +10,7 @@ export interface AuthContextProps {
   handleLogin: (payload: LoginInterface) => Promise<void>;
   handleLogout: () => void;
   refresh: () => Promise<void>;
+  handleDeleteAccount: () => void;
 }
 
 //@ts-ignore
@@ -23,6 +24,7 @@ export const AuthProvider: React.FC = ({ children }) => {
     handleLogin,
     handleLogout,
     refresh,
+    handleDeleteAccount,
   } = useAuth();
 
   return (
@@ -34,6 +36,7 @@ export const AuthProvider: React.FC = ({ children }) => {
         handleLogin,
         handleLogout,
         refresh,
+        handleDeleteAccount,
       }}
     >
       {children}

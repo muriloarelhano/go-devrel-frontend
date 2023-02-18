@@ -8,14 +8,18 @@ import {
   Box,
   Button,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useContext } from "react";
 import { BsFillCloudSlashFill } from "react-icons/bs";
+import { AuthContext } from "../../contexts/AuthContext";
 import { deleteUser } from "../../services/userService";
 
 export const DeleteAccount: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef<HTMLButtonElement>(null);
+  const toast = useToast();
+  const { handleDeleteAccount } = useContext(AuthContext);
 
   return (
     <Box py={8}>
@@ -52,8 +56,24 @@ export const DeleteAccount: React.FC = () => {
                 onClick={async () => {
                   try {
                     await deleteUser();
+                    toast({
+                      status: "success",
+                      title: "Conta deletada com sucesso",
+                      description:
+                        "Até mais, obrigado por participar do projeto!",
+                    });
+                    setTimeout(() => {
+                      handleDeleteAccount();
+                    }, 3000);
                   } catch (error: any) {
-                    console.log(error)
+                    toast({
+                      status: "error",
+                      title: "Erro ao deletar a conta",
+                      description:
+                        "Não foi possível realizar essa ação no momento, tente mais tarde" +
+                        error.message,
+                    });
+                    console.log(error);
                   }
                 }}
                 ml={3}
