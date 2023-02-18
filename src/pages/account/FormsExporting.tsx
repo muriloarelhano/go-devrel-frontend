@@ -26,6 +26,7 @@ export const FormsExporting = () => {
     },
     onSubmit: async (values: ExportFormByDateDto) => {
       const forms = await exportByDate(values, toast);
+
       const data =
         values.format === ExportFormatTypes.JSON
           ? JSON.stringify(forms)
