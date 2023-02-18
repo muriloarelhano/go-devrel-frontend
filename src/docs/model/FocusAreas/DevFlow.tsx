@@ -16,6 +16,13 @@ export const DevFlowDoc: React.FC = () => {
         Figura 20 apresenta os objetos que ajudam na transferência de valor
         nesta área de foco (os consumidos e os providos pela área).
       </Text>
+      <Text>
+        Especificamente nesta área há um conjunto de fases, como explicado na
+        estrutura do modelo (Figura 16), e que são descritos mais a frente. Há
+        três fases para apoiar o progresso do desenvolvedor, essas fases
+        consideram modelos de negócio e de gerenciamento de parceria. Tem-se,
+        desta forma, as seguintes fases: Início, Crescimento e Maturidade.
+      </Text>
     </>
   );
 };

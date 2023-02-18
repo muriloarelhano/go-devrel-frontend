@@ -12,12 +12,14 @@ import { Sidebar } from "./Sidebar";
 import { SidebarItem } from "./SidebarItem";
 import { Summary } from "./Summary";
 import { WikiButtons } from "./WikiButtons";
+import { Prose } from "@nikolovlazar/chakra-ui-prose";
 
 export interface WikiProps {
   items: SidebarItem[];
+  format: "wiki" | "forms";
 }
 
-export const Wiki: React.FC<WikiProps> = ({ items }) => {
+export const Wiki: React.FC<WikiProps> = ({ items, format }) => {
   // Complete path to array index of current item on content
   const [currentItemPath, setCurrentItemPath] = useState<number[]>([0]);
 
@@ -43,32 +45,39 @@ export const Wiki: React.FC<WikiProps> = ({ items }) => {
     const newNestedHeadings = getNestedHeadings(headingElements);
     setNestedHeadings(newNestedHeadings);
 
-    if (currentItemPath.length > 1) {
-      const currentItemsArray = getDeepestChildrenArrayPath(
-        items,
-        currentItemPath
-      );
-      const { next, prev } = getPrevNextItem(
-        currentItemsArray,
-        currentItemPath[currentItemPath.length - 1]
-      );
-      setPreviousItem(prev);
-      setNextItem(next);
-    } else {
-      const { next, prev } = getPrevNextItem(items, currentItemPath[0]);
-      setPreviousItem(prev);
-      setNextItem(next);
+    if (format === "wiki") {
+      if (currentItemPath.length > 1) {
+        const currentItemsArray = getDeepestChildrenArrayPath(
+          items,
+          currentItemPath
+        );
+        const { next, prev } = getPrevNextItem(
+          currentItemsArray,
+          currentItemPath[currentItemPath.length - 1]
+        );
+        setPreviousItem(prev);
+        setNextItem(next);
+      } else {
+        const { next, prev } = getPrevNextItem(items, currentItemPath[0]);
+        setPreviousItem(prev);
+        setNextItem(next);
+      }
     }
-  }, [currentItemPath, items]);
+  }, [currentItemPath, items, format]);
 
   return (
-    <Container maxW={"1600px"}>
+    <Container maxW={"80vw"}>
       <Grid
-        gap={12}
+        gap={10}
         my={8}
-        gridTemplateColumns={"0.7fr 3fr 0.8fr"}
-        templateAreas={`"sidebar content summary"
-                    "sidebar buttons summary"`}
+        gridTemplateColumns={format === "wiki" ? "0.5fr 5fr 1fr" : "1fr 4fr"}
+        templateAreas={
+          format === "wiki"
+            ? `"sidebar content summary"
+              "sidebar buttons summary"`
+            : `"sidebar content"
+              "sidebar buttons"`
+        }
       >
         <GridItem area={"sidebar"}>
           <Sidebar
@@ -83,21 +92,31 @@ export const Wiki: React.FC<WikiProps> = ({ items }) => {
           overflowY={"auto"}
           className={style.sideBar}
         >
-          <Stack direction={"column"} gap={2}>
-            {currentPageComponent}
+          <Stack direction={"column"} gap={2} pt={-10}>
+            {format === "wiki" ? (
+              <Prose marginTop={-12}> {currentPageComponent}</Prose>
+            ) : (
+              currentPageComponent
+            )}
           </Stack>
         </GridItem>
-        <GridItem area={"summary"}>
-          <Summary headings={nestedHeadings} />
-        </GridItem>
-        <GridItem area={"buttons"}>
-          <WikiButtons
-            nextItem={nextItem}
-            previousItem={previousItem}
-            setCurrentPageComponent={setCurrentPageComponent}
-            setCurrentItemPath={setPath}
-          />
-        </GridItem>
+        {format === "wiki" ? (
+          <>
+            <GridItem area={"summary"}>
+              <Summary headings={nestedHeadings} />
+            </GridItem>
+            <GridItem area={"buttons"}>
+              <WikiButtons
+                nextItem={nextItem}
+                previousItem={previousItem}
+                setCurrentPageComponent={setCurrentPageComponent}
+                setCurrentItemPath={setPath}
+              />
+            </GridItem>
+          </>
+        ) : (
+          ""
+        )}
       </Grid>
     </Container>
   );

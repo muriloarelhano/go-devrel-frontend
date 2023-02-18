@@ -1,0 +1,3 @@
+export enum ErrosEnum {
+  ERROR_INVALID_CREDENTIALS = "ERROR_INVALID_CREDENTIALS",
+}

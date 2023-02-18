@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/iframe-has-title */
+import { Container } from "@chakra-ui/react";
 import HeaderMenu from "../components/Header/Header";
 import Footer from "../components/home/Footer";
 import { Wiki } from "../components/Wiki/Wiki";
@@ -8,7 +9,9 @@ export function WikiPage() {
   return (
     <>
       <HeaderMenu />
-      <Wiki items={wikiPageItems}></Wiki>
+      <Container maxW="container.xl">
+        <Wiki items={wikiPageItems} format={"wiki"} />
+      </Container>
       <Footer />
     </>
   );
