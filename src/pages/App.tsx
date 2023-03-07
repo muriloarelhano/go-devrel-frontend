@@ -7,6 +7,7 @@ import { AccountDashboard } from "./account";
 import Forms from "./Forms";
 import Home from "./Home";
 import Model from "./Model";
+import { MyStage } from "./mystage";
 import { WikiPage } from "./Wiki";
 
 export const App = () => {
@@ -28,7 +29,7 @@ export const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/model" element={<Model />} />
-        <Route path="/my-stage" element={<Home />} />
+        <Route path="/my-stage" element={<MyStage />} />
         {authenticated ? (
           <>
             <Route path="/forms" element={<Forms />} />
