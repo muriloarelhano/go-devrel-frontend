@@ -22,7 +22,10 @@ const schema = yup.object().shape({
   password: yup.string().required("Senha é obrigatória"),
 });
 
-const LoginContent: React.FC<{ onClose: any }> = ({ onClose }) => {
+const LoginContent: React.FC<{ onClose: any; goToSignIn: () => void }> = ({
+  onClose,
+  goToSignIn,
+}) => {
   const [values, setValues] = useState<LoginInterface>();
   const [loading, setLoading] = useState<boolean>(false);
   const { handleLogin } = useContext(AuthContext);
@@ -112,6 +115,7 @@ const LoginContent: React.FC<{ onClose: any }> = ({ onClose }) => {
             fontWeight="light"
             fontSize="small"
             cursor="pointer"
+            onClick={goToSignIn}
           >
             Não tenho conta
           </Text>

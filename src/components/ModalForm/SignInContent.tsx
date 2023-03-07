@@ -33,13 +33,13 @@ const schema = yup.object().shape({
     .required("Senha é obrigatória"),
 });
 
-const SignInContent = () => {
+const SignInContent: React.FC = () => {
   const [values, setValues] = useState<CreateUser>();
   const toast = useToast();
 
   const {
     register,
-    formState: { errors, isSubmitting, isValid, isDirty },
+    formState: { errors, isSubmitting, isValid },
   } = useForm<CreateUser>({
     mode: "onBlur",
     resolver: yupResolver(schema),
@@ -166,7 +166,7 @@ const SignInContent = () => {
           width="full"
           colorScheme="teal"
           type="submit"
-          disabled={isSubmitting || !isDirty || !isValid}
+          disabled={isSubmitting || !isValid}
         >
           Cadastrar
         </Button>
