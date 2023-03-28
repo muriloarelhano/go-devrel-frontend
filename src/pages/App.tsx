@@ -1,4 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import "../i18n/i18n";
+import "react-medium-image-zoom/dist/styles.css";
+
 import { useContext, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";

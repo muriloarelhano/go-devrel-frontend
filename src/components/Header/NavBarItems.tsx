@@ -7,7 +7,7 @@ import { FaMoon, FaSun } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import { HeaderFormContext } from "../../contexts/HeaderFormContext";
-import ModalForm from "../ModalForm/ModalForm";
+import ModalForm from "../AccountForms/ModalForm";
 import { NavBarUserButtons } from "./UserMenu";
 
 const NavBarItems: React.FunctionComponent<{

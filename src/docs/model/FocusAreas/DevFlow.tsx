@@ -1,5 +1,6 @@
 import React from "react";
 import { Heading, Text } from "@chakra-ui/react";
+import { WikiImage } from "../../../components";
 export const DevFlowDoc: React.FC = () => {
   return (
     <>
@@ -16,6 +17,12 @@ export const DevFlowDoc: React.FC = () => {
         Figura 20 apresenta os objetos que ajudam na transferência de valor
         nesta área de foco (os consumidos e os providos pela área).
       </Text>
+
+      <WikiImage
+        image={require("../../../assets/images/model/Figura20.png")}
+        imageCaption={"Figura 20. Objetos de transferência de valor - Fluxo de Avanço do Desenvolvedor."}
+      />
+      
       <Text>
         Especificamente nesta área há um conjunto de fases, como explicado na
         estrutura do modelo (Figura 16), e que são descritos mais a frente. Há

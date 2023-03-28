@@ -1,5 +1,6 @@
 import { Heading, Text } from "@chakra-ui/react";
 import React from "react";
+import { WikiImage } from "../../components";
 export const ModelDoc: React.FC = () => {
   return (
     <>
@@ -26,6 +27,10 @@ export const ModelDoc: React.FC = () => {
         descritos de forma textual, é apresentado na Figura 17. A descrição dos
         elementos que compõem o modelo é abordada mais a frente.
       </Text>
+      <WikiImage
+        image={require("../../assets/images/model/figura16.png")}
+        imageCaption={"Figura 16. Estrutura do modelo DevGo."}
+      />
       <Text>
         Na Figura 16, é apresentada a estrutura do modelo de DEVGO e um conjunto
         de lições aprendidas baseadas na experiência de profissionais de DevRel
@@ -44,6 +49,10 @@ export const ModelDoc: React.FC = () => {
         fluxo de avanço do desenvolvedor dentro do ecossistema que é
         impulsionada por um conjunto de passos a serem dados.
       </Text>
+      <WikiImage
+        image={require("../../assets/images/model/figura17.png")}
+        imageCaption={"Figura 17. DevGo - modelo para governança de desenvolvedores."}
+      />
       <Text>
         🌟 Cada uma das fases é composta por estágios, que compreendem um
         período de desenvolvimento do desenvolvedor. Um estágio é formado por:

@@ -1,5 +1,6 @@
 import { Heading, ListItem, Text, UnorderedList } from "@chakra-ui/react";
 import React from "react";
+import { WikiImage } from "../../../components";
 export const MonitoringModelDoc: React.FC = () => {
   return (
     <>
@@ -20,6 +21,10 @@ export const MonitoringModelDoc: React.FC = () => {
         repositórios que podem ser utilizados, pelos profissionais de DevRel,
         dentro da área de foco de monitoramento.
       </Text>
+      <WikiImage
+        image={require("../../../assets/images/model/Tabela25.png")}
+        imageCaption={"Tabela 25. Categorias de Repositórios."}
+      />
       <Text>
         Os repositórios (p.ex.: Loja de Apps, Questões e Respostas, Relatórios
         de Defeitos e Projeto de Software) armazenam dados gerados a partir do
@@ -32,16 +37,29 @@ export const MonitoringModelDoc: React.FC = () => {
         uma comunidade específica na África do Sul) e o ecossistema global de
         desenvolvedores.
       </Text>
+
+      <WikiImage
+        image={require("../../../assets/images/model/Tabela26.png")}
+        imageCaption={"Tabela 26. Repositório de Motivações."}
+      />
+
       <Text>
         Os objetos de transferência de valor para esta área de foco, que consume
         e provê valor para todas outras áreas de foco, são descritos na Figura
         21.
       </Text>
+
+      <WikiImage
+        image={require("../../../assets/images/model/Figura21.png")}
+        imageCaption={"Figura 21. Objeto de transferência de valor - Monitoramento."}
+        width={'100%'}
+      />
+
       <Text>
         Especificamente, nesta tese, analisamos um repositório da categoria
         Perguntas e Repostas, o Stack Overflow, como forma de obter insights
         para o monitoramento a partir desta categoria. Esta análise de insights
-        é baseadaa em mineração de repositórios de software como forma de obter
+        é baseada em mineração de repositórios de software como forma de obter
         informações que ajudem na governança de desenvolvedores. Os insights são
         os seguintes:
       </Text>
