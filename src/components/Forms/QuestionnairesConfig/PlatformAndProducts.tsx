@@ -5,7 +5,10 @@ import {
   PlatProdFormStep3,
 } from "../QuestionsConfig/PlatformAndProducts";
 import { Questions } from "../Questions";
-import { EFormIdentifiers, StageFormValues } from "../../../interfaces/interfaces";
+import {
+  EFormIdentifiers,
+  StageFormValues,
+} from "../../../interfaces/interfaces";
 
 export const PlatProdFormInitialValues: Partial<StageFormValues> = {
   formIdentifier: EFormIdentifiers.PLATFORM_AND_PRODUCTS,
@@ -32,7 +35,7 @@ export const PlatProdFormInitialValues: Partial<StageFormValues> = {
 export const PlatProdFormSteps = (formik: FormikProps<any>) => [
   {
     label: "Objetivo",
-    description: "Objetivo De Plataforma E Produtos",
+    description: "Objetivo de plataformas e produtos",
     questionsComponent: (
       <Questions
         formik={formik}
@@ -43,7 +46,7 @@ export const PlatProdFormSteps = (formik: FormikProps<any>) => [
   },
   {
     label: "Componentes",
-    description: "Componente De Plataforma E Produtos",
+    description: "Componente de plataformas e produtos",
     questionsComponent: (
       <Questions
         formik={formik}
@@ -54,7 +57,7 @@ export const PlatProdFormSteps = (formik: FormikProps<any>) => [
   },
   {
     label: "Consome",
-    description: "Objetos De Transferência De Valor - CONSOME DE",
+    description: "Objetos de transferência e valor - CONSOME DE",
     questionsComponent: (
       <Questions
         formik={formik}
@@ -65,7 +68,7 @@ export const PlatProdFormSteps = (formik: FormikProps<any>) => [
   },
   {
     label: "Provê",
-    description: "Objetos De Transferência De Valor - Provê Para",
+    description: "Objetos de transferência e valor - Provê Para",
     questionsComponent: (
       <Questions
         formik={formik}

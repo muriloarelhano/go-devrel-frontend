@@ -5,7 +5,7 @@ export const AwarenessStage: React.FC = () => {
   return (
     <>
       <Heading>Estágio de Sensibilização</Heading>
-      <Text>Apenas lembrando, nesse estágio você deve analisar....</Text>
+      <Text>Página em construção</Text>
     </>
   );
 };

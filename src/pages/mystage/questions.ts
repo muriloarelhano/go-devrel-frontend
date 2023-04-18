@@ -13,16 +13,16 @@ export interface MyStageQuestion {
 
 export const questions: MyStageQuestion[] = [
   {
-    title: "O que você acha sobre o projeto?",
+    title: "Em que estágio você está?",
     answers: [
-      { label: "Sim", for: EStages.ACTIVATE, value: 1 },
+      { label: "Ativação", for: EStages.ACTIVATE, value: 1 },
       {
-        label: "Não sei",
+        label: "Entrada",
         for: EStages.BEGINNING,
         value: 1,
       },
       {
-        label: "Claramente que sim",
+        label: "Referência",
         for: EStages.REFERENCE,
         value: 2,
       },

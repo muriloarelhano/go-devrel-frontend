@@ -109,7 +109,7 @@ export const MyStage: React.FC = () => {
     } catch (error) {
       setError("answers", {
         type: "required",
-        message: "Todos os campos precisam estar respondidos",
+        message: "Todos os campos precisam estar preenchidos",
       });
       console.log(error);
     }
