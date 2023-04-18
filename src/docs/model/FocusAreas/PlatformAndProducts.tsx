@@ -1,4 +1,5 @@
 import { Heading, Text } from "@chakra-ui/react";
+import { WikiImage } from "../../../components";
 
 export const PlatformAndProductsDoc = () => {
   return (
@@ -19,6 +20,11 @@ export const PlatformAndProductsDoc = () => {
         são apresentados os objetos de transferência de valor que são consumidos
         e providos por esta área de foco.
       </Text>
+
+      <WikiImage
+        image={require("../../../assets/images/model/Figura18.png")}
+        imageCaption={"Figura 18. Objetos de transferência de valor - Plataforma e Produtos."}
+      />
     </>
   );
 };

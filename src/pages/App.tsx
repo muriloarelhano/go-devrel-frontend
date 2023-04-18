@@ -1,4 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import "../i18n/i18n";
+import "react-medium-image-zoom/dist/styles.css";
+
 import { useContext, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
@@ -7,6 +10,7 @@ import { AccountDashboard } from "./account";
 import Forms from "./Forms";
 import Home from "./Home";
 import Model from "./Model";
+import { MyStage } from "./mystage";
 import { WikiPage } from "./Wiki";
 
 export const App = () => {
@@ -28,7 +32,7 @@ export const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/model" element={<Model />} />
-        <Route path="/my-stage" element={<Home />} />
+        <Route path="/my-stage" element={<MyStage />} />
         {authenticated ? (
           <>
             <Route path="/forms" element={<Forms />} />

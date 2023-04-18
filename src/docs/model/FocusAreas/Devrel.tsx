@@ -1,5 +1,6 @@
 import React from "react";
 import { Heading, Text } from "@chakra-ui/react";
+import { WikiImage } from "../../../components";
 export const DevrelDoc = () => {
   return (
     <>
@@ -39,6 +40,13 @@ export const DevrelDoc = () => {
         que são consumidos e providos por esta área de foco são apresentados na
         Figura 19
       </Text>
+
+      <WikiImage
+        image={require("../../../assets/images/model/Figura19.png")}
+        imageCaption={
+          "Figura 19. Objetos de transferência de valor - DevRel (Evangelismo e Advocacia)."
+        }
+      />
     </>
   );
 };

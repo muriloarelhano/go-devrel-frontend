@@ -1,0 +1,12 @@
+{
+    "translation": {
+        "stages": {
+            "awareness": "Sensibilização",
+            "beginning": "Entrada",
+            "activate": "Ativação",
+            "retention": "Retenção",
+            "recognition": "Reconhecimento",
+            "reference": "Referência"
+        }
+    }
+}
