@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { FormikProps, useFormik } from "formik";
+import { Button, Flex, Heading, useToast, VStack } from "@chakra-ui/react";
 import { Step, Steps, useSteps } from "chakra-ui-steps";
-import { sendFormResponse } from "../../services/formService";
-import { Box, Button, Flex, Heading, useToast } from "@chakra-ui/react";
+import { FormikProps, useFormik } from "formik";
+import React, { useState } from "react";
 import { StageFormValues } from "../../interfaces/interfaces";
+import { sendFormResponse } from "../../services/formService";
 
 export interface StepComponentItem {
   label: string;
@@ -49,58 +49,63 @@ export const Questionnaire: React.FC<QuestionnaireProps> = ({
   const steps = prepareSteps(formik);
 
   return (
-    <Flex flexDir="column" width="100%" gap={5}>
+    <VStack justify={"start"} align={"start"} width="100%" gap={5}>
       <Heading>{title}</Heading>
-      <Flex flexDir="column" width="100%">
-        <Steps colorScheme="teal" activeStep={activeStep}>
-          {steps.map(
-            ({ label, description, questionsComponent }, index: number) => (
-              <Step label={label} key={label}>
-                <Box
-                  p={5}
-                  border={"black solid 1px"}
-                  borderRadius={"md"}
-                  my={10}
-                >
-                  <Heading fontSize={"xl"} mb={5}>
-                    {description}
-                  </Heading>
-                  {questionsComponent
-                    ? questionsComponent
-                    : "Nenhum componente foi adicionado aqui!!"}
-                </Box>
-              </Step>
-            )
-          )}
-        </Steps>
-        {activeStep === steps.length ? (
-          <Flex px={4} py={4} width="100%" flexDirection="column">
-            <Heading fontSize="xl" textAlign="center">
-              {onError
-                ? "Oops, acho que algo deu errado ;-;"
-                : "Muito obrigado pela sua colaboração!!"}
-            </Heading>
-            <Button mx="auto" mt={6} size="sm" onClick={() => reset()}>
-              {onError ? "Tentar novamente" : "Voltar do inicio"}
-            </Button>
-          </Flex>
-        ) : (
-          <Flex width="100%" justify="flex-end">
-            <Button
-              isDisabled={activeStep === 0}
-              mr={4}
-              onClick={prevStep}
-              size="sm"
-              variant="ghost"
-            >
-              Voltar
-            </Button>
-            <Button size="sm" onClick={handleSubmitFormClick}>
-              {activeStep === steps.length - 1 ? "Enviar" : "Próximo"}
-            </Button>
-          </Flex>
+
+      <Steps
+        colorScheme="teal"
+        justifyContent={"start"}
+        activeStep={activeStep}
+      >
+        {steps.map(
+          ({ label, description, questionsComponent }, index: number) => (
+            <Step label={label} key={label}>
+              <VStack
+                p={5}
+                my={10}
+                align={"start"}
+                borderRadius={"md"}
+                border={"black solid 1px"}
+              >
+                <Heading fontSize={"xl"} mb={5}>
+                  {description}
+                </Heading>
+                {questionsComponent
+                  ? questionsComponent
+                  : "Nenhum componente foi adicionado aqui!!"}
+              </VStack>
+            </Step>
+          )
         )}
-      </Flex>
-    </Flex>
+      </Steps>
+
+      {activeStep === steps.length ? (
+        <Flex px={4} py={4} width="100%" flexDirection="column">
+          <Heading fontSize="xl" textAlign="center">
+            {onError
+              ? "Oops, acho que algo deu errado ;-;"
+              : "Muito obrigado pela sua colaboração!!"}
+          </Heading>
+          <Button mx="auto" mt={6} size="sm" onClick={() => reset()}>
+            {onError ? "Tentar novamente" : "Voltar do inicio"}
+          </Button>
+        </Flex>
+      ) : (
+        <Flex width="100%" justify="flex-end">
+          <Button
+            isDisabled={activeStep === 0}
+            mr={4}
+            onClick={prevStep}
+            size="sm"
+            variant="ghost"
+          >
+            Voltar
+          </Button>
+          <Button size="sm" onClick={handleSubmitFormClick}>
+            {activeStep === steps.length - 1 ? "Enviar" : "Próximo"}
+          </Button>
+        </Flex>
+      )}
+    </VStack>
   );
 };

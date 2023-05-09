@@ -4,7 +4,7 @@ import {
   StageFormValues,
 } from "../../../interfaces/interfaces";
 import { Questions } from "../Questions";
-import { MonitoringFormStep1 } from "../Questions/Monitoring";
+import { MonitoringFormGoals } from "../Questions/Monitoring";
 
 export const MonitoringFormInitialValues: Partial<StageFormValues> = {
   formIdentifier: EFormIdentifiers.PLATFORM_AND_PRODUCTS,
@@ -18,12 +18,12 @@ export const MonitoringFormInitialValues: Partial<StageFormValues> = {
 
 export const MonitoringFormSteps = (formik: FormikProps<any>) => [
   {
-    label: "Objetivo",
+    label: "Objetivos",
     description: "Objetivo de plataforma e produtos",
     questionsComponent: (
       <Questions
         formik={formik}
-        questions={MonitoringFormStep1}
+        questions={MonitoringFormGoals}
         responsesGroup={"goals"}
       />
     ),
