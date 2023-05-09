@@ -3,7 +3,7 @@ import {
   PlatProdFormStep1,
   PlatProdFormStep2,
   PlatProdFormStep3,
-} from "../QuestionsConfig/PlatformAndProducts";
+} from "../Questions/PlatformAndProducts";
 import { Questions } from "../Questions";
 import {
   EFormIdentifiers,

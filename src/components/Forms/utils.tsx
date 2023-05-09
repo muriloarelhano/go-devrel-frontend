@@ -4,11 +4,11 @@ import { Questionnaire } from "./Questionnaire";
 import {
   DevFlowFormInitialValues,
   DevFlowFormSteps
-} from "./QuestionnairesConfig/DevFlow";
+} from "./Questionnaires/DevFlow";
 import {
   PlatProdFormInitialValues,
   PlatProdFormSteps
-} from "./QuestionnairesConfig/PlatformAndProducts";
+} from "./Questionnaires/PlatformAndProducts";
 
 export const prepareStageForms = (stage: EStages) => [
   {
