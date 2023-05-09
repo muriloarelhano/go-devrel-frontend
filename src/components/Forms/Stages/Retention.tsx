@@ -1,10 +1,10 @@
 import { Heading } from "@chakra-ui/react";
 import React from "react";
 
-export const AwarenessStage: React.FC = () => {
+export const RetentionStage: React.FC = () => {
   return (
     <>
-      <Heading>Estágio de Sensibilização</Heading>
+      <Heading>Estágio de Retenção</Heading>
     </>
   );
 };
