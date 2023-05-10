@@ -4,7 +4,7 @@ import {
   StageFormValues,
 } from "../../../interfaces/interfaces";
 import { Questions } from "../Questions";
-import { DevFlowStep1 } from "../QuestionsConfig/DevFlow";
+import { DevFlowStep1 } from "../Questions/DevFlow";
 
 export const DevFlowFormInitialValues: Partial<StageFormValues> = {
   formIdentifier: EFormIdentifiers.PLATFORM_AND_PRODUCTS,
@@ -19,7 +19,7 @@ export const DevFlowFormInitialValues: Partial<StageFormValues> = {
 export const DevFlowFormSteps = (formik: FormikProps<any>) => [
   {
     label: "Objetivo",
-    description: "Objetivo De Plataforma E Produtos",
+    description: "Objetivo de plataforma e produtos",
     questionsComponent: (
       <Questions
         formik={formik}

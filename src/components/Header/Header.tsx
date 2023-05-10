@@ -29,23 +29,23 @@ const HeaderMenu: React.FunctionComponent<MenuOptions> = () => {
   return (
     <Container
       id="header"
-      bg={menuIsOpen ? (colorMode === "dark" ? "gray.700" : "white") : ""}
-      position={menuIsOpen ? "absolute" : "relative"}
       maxW="full"
-      paddingBottom={{ base: "2" }}
-      borderBottomRadius={menuIsOpen ? "3xl" : "none"}
-      shadow={menuIsOpen ? "lg" : "none"}
       zIndex="99"
       transition="all 0.5s"
+      paddingBottom={{ base: "2" }}
+      shadow={menuIsOpen ? "lg" : "none"}
+      position={menuIsOpen ? "absolute" : "relative"}
+      borderBottomRadius={menuIsOpen ? "3xl" : "none"}
+      bg={menuIsOpen ? (colorMode === "dark" ? "gray.700" : "white") : ""}
     >
       <Container maxW="container.xl">
         <Stack
           py="2"
-          direction="row"
           as="header"
-          justify="space-between"
-          align="center"
           wrap="wrap"
+          align="center"
+          direction="row"
+          justify="space-between"
         >
           <Box display={{ lg: "none" }} onClick={toggle} cursor="pointer">
             <CgMenu fontSize="25" />

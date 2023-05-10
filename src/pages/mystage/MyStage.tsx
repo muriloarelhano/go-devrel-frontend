@@ -116,7 +116,7 @@ export const MyStage: React.FC = () => {
   }
 
   return (
-    <Container maxW={"container.xl"}>
+    <>
       <HeaderMenu />
       <Container maxW={"container.lg"} mt={10}>
         {isEmpty(lastStage) ? (
@@ -191,7 +191,9 @@ export const MyStage: React.FC = () => {
           <ModalHeader>Parabéns, esse é o seu estagio</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Heading textAlign={"center"}>{t(`stages.${myStageResult}`)}</Heading>
+            <Heading textAlign={"center"}>
+              {t(`stages.${myStageResult}`)}
+            </Heading>
           </ModalBody>
 
           <ModalFooter>
@@ -209,6 +211,6 @@ export const MyStage: React.FC = () => {
           </ModalFooter>
         </ModalContent>
       </Modal>
-    </Container>
+    </>
   );
 };

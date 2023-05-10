@@ -70,7 +70,7 @@ export const Wiki: React.FC<WikiProps> = ({ items, format }) => {
       <Grid
         gap={10}
         my={8}
-        gridTemplateColumns={format === "wiki" ? "0.5fr 5fr 1fr" : "1fr 4fr"}
+        gridTemplateColumns={format === "wiki" ? "0.5fr 5fr 1.2fr" : "1fr 4fr"}
         templateAreas={
           format === "wiki"
             ? `"sidebar content summary"
