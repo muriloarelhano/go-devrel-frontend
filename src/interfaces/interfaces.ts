@@ -13,7 +13,7 @@ export enum EFormIdentifiers {
   DEVELOPER_RELATION = "developer-relation",
 }
 
-export enum ExportFormatTypes{
+export enum ExportFormatTypes {
   CSV = "CSV",
   JSON = "JSON",
 }
@@ -31,10 +31,16 @@ export interface StageFormValues {
   responses: FormResponse;
 }
 
+export enum UserRoles {
+  User = "user",
+  Admin = "admin",
+}
+
 export interface UserInfo {
   email: string;
   first_name: string;
   last_name: string;
+  role: UserRoles;
   phone?: number;
   birthdate?: string;
   isEmailValidated: boolean;

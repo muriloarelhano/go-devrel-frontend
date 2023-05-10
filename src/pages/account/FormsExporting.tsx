@@ -46,7 +46,7 @@ export const FormsExporting = () => {
           <Select
             id="format"
             name="format"
-            placeholder="Select file format"
+            placeholder="Selecione o formato do arquivo"
             onChange={formik.handleChange}
             value={formik.values.format}
           >
