@@ -32,6 +32,7 @@ import HeaderMenu from "../../components/Header/Header";
 import { EStages } from "../../interfaces/interfaces";
 import { Answer, questions } from "./questions";
 import { useTranslation } from "react-i18next";
+import Footer from "../../components/home/Footer";
 
 const LAST_STAGE_STORAGE_KEY = "lastMyStageResult";
 
@@ -211,6 +212,7 @@ export const MyStage: React.FC = () => {
           </ModalFooter>
         </ModalContent>
       </Modal>
+      <Footer />
     </>
   );
 };
