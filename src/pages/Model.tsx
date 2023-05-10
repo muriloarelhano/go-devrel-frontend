@@ -9,8 +9,8 @@ function Model() {
   return (
     <>
       <HeaderMenu />
-      <Container maxW="container.xl">
-        <Wiki items={modelPageItems} format={"wiki"}></Wiki>
+      <Container maxW="container.2xl">
+        <Wiki items={modelPageItems} format={"wiki"}/>
       </Container>
       <Footer />
     </>
