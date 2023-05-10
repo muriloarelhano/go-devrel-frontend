@@ -31,7 +31,7 @@ export const SidebarItemComponent: React.FC<SidebarItemProps> = ({
   setCurrentPageComponent,
   setCurrentItemPath,
   expanded,
-  depthStep = 10,
+  depthStep = 4,
   depth = 0,
   ...rest
 }) => {
@@ -51,14 +51,12 @@ export const SidebarItemComponent: React.FC<SidebarItemProps> = ({
 
   return (
     <>
-      <ListItem>
+      <ListItem width={"100%"} pl={depth * depthStep} pr={1} py={1}>
         <Button
           size={"sm"}
-          mb={2}
-          minW={"100%"}
-          placeContent={"flex-start"}
+          width={"100%"}
           onClick={onClickItem}
-          style={{ marginLeft: depth * depthStep }}
+          placeContent={"flex-start"}
           {...rest}
         >
           {icon}

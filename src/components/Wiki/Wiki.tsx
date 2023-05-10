@@ -84,7 +84,7 @@ export const Wiki: React.FC<WikiProps> = ({ items, format }) => {
             items={items}
             setCurrentPageComponent={setCurrentPageComponent}
             setCurrentItemPath={setPath}
-          ></Sidebar>
+          />
         </GridItem>
         <GridItem
           area={"content"}
