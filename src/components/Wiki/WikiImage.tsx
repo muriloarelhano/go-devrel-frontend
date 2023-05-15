@@ -14,9 +14,15 @@ export const WikiImage: React.FC<WikiImageProps> = ({
   width = "80%",
 }) => {
   return (
-    <VStack py={8} justify={"center"} align={"center"}>
+    <VStack py={8} justify={"center"} align={"center"} mx={"auto"}>
       <Zoom>
-        <img alt={imageAlt} height={"auto"} width={width} src={image} />
+        <img
+          alt={imageAlt}
+          height={"auto"}
+          width={width}
+          src={image}
+          style={{ margin: "auto" }}
+        />
       </Zoom>
       <Text pt={4}>{imageCaption}</Text>
     </VStack>
