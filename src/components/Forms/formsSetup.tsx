@@ -1,14 +1,37 @@
-
-import { EFormIdentifiers, EStages } from "../../interfaces/interfaces";
+import {
+  EFormIdentifiers,
+  EStages,
+  StageFormValues,
+} from "../../interfaces/interfaces";
 import { Questionnaire } from "./Questionnaire";
-import {
-  DevFlowFormInitialValues,
-  DevFlowFormSteps
-} from "./Questionnaires/DevFlow";
-import {
-  PlatProdFormInitialValues,
-  PlatProdFormSteps
-} from "./Questionnaires/PlatformAndProducts";
+import { DevFlowFormSteps } from "./Questionnaires/DevFlow";
+import { PlatProdFormSteps } from "./Questionnaires/PlatformAndProducts";
+
+export const FormInitialValues = (
+  stage: EFormIdentifiers
+): Partial<StageFormValues> => {
+  return {
+    formIdentifier: stage,
+    responses: {
+      goals: {
+        otherInformation: "",
+        checked: [],
+      },
+      components: {
+        otherInformation: "",
+        checked: [],
+      },
+      consume: {
+        otherInformation: "",
+        checked: [],
+      },
+      provide: {
+        otherInformation: "",
+        checked: [],
+      },
+    },
+  };
+};
 
 export const prepareStageForms = (stage: EStages) => [
   {
@@ -19,7 +42,9 @@ export const prepareStageForms = (stage: EStages) => [
         title={"Plataforma e Produtos"}
         formStage={stage}
         prepareSteps={PlatProdFormSteps}
-        formikInitialValues={PlatProdFormInitialValues}
+        formikInitialValues={FormInitialValues(
+          EFormIdentifiers.PLATFORM_AND_PRODUCTS
+        )}
       />
     ),
   },
@@ -31,7 +56,7 @@ export const prepareStageForms = (stage: EStages) => [
         title={"Developer Relations"}
         formStage={stage}
         prepareSteps={DevFlowFormSteps}
-        formikInitialValues={DevFlowFormInitialValues}
+        formikInitialValues={FormInitialValues(EFormIdentifiers.DEVELOPER_FLOW)}
       />
     ),
   },
@@ -43,7 +68,7 @@ export const prepareStageForms = (stage: EStages) => [
         title={"Monitoramento"}
         formStage={stage}
         prepareSteps={PlatProdFormSteps}
-        formikInitialValues={PlatProdFormInitialValues}
+        formikInitialValues={FormInitialValues(EFormIdentifiers.MONITORING)}
       />
     ),
   },
@@ -55,7 +80,7 @@ export const prepareStageForms = (stage: EStages) => [
         title={"Fluxo do Desenvolvedor"}
         formStage={stage}
         prepareSteps={PlatProdFormSteps}
-        formikInitialValues={PlatProdFormInitialValues}
+        formikInitialValues={FormInitialValues(EFormIdentifiers.DEVELOPER_FLOW)}
       />
     ),
   },

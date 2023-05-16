@@ -2,6 +2,7 @@ import { Button, Flex, Heading, useToast, VStack } from "@chakra-ui/react";
 import { Step, Steps, useSteps } from "chakra-ui-steps";
 import { FormikProps, useFormik } from "formik";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { StageFormValues } from "../../interfaces/interfaces";
 import { sendFormResponse } from "../../services/formService";
 
@@ -25,6 +26,7 @@ export const Questionnaire: React.FC<QuestionnaireProps> = ({
 }) => {
   const toast = useToast();
   const [onError, setOnError] = useState(false);
+  const { t } = useTranslation();
 
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,
@@ -50,7 +52,9 @@ export const Questionnaire: React.FC<QuestionnaireProps> = ({
 
   return (
     <VStack justify={"start"} align={"start"} width="100%" gap={5}>
-      <Heading>{title}</Heading>
+      <Heading>
+        {t("stages." + formStage)} -&gt; {title}
+      </Heading>
 
       <Steps
         colorScheme="teal"
@@ -63,6 +67,7 @@ export const Questionnaire: React.FC<QuestionnaireProps> = ({
               <VStack
                 p={5}
                 my={10}
+                width={"100%"}
                 align={"start"}
                 borderRadius={"md"}
                 border={"black solid 1px"}

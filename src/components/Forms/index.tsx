@@ -7,7 +7,7 @@ import { RecognitionStage } from "./Stages/Recognition";
 import { ReferenceStage } from "./Stages/Reference";
 import { RetentionStage } from "./Stages/Retention";
 import { StartPage } from "./Stages/StartPage";
-import { prepareStageForms } from "./utils";
+import { prepareStageForms } from "./formsSetup";
 
 export const FORMS: SidebarItem[] = [
   {

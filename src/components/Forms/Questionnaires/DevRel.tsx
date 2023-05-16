@@ -1,30 +1,54 @@
 import { FormikProps } from "formik";
-import {
-  EFormIdentifiers,
-  StageFormValues
-} from "../../../interfaces/interfaces";
 import { Questions } from "../Questions";
-import { DevRelStep1 } from "../Questions/DeveloperRelations";
-
-export const DevRelInitialValues: Partial<StageFormValues> = {
-  formIdentifier: EFormIdentifiers.PLATFORM_AND_PRODUCTS,
-  responses: {
-    goals: {
-      otherInformation: "",
-      checked: [],
-    },
-  },
-};
+import {
+  DevRelFormComponents,
+  DevRelFormConsume,
+  DevRelFormGoals,
+  DevRelFormProvide,
+} from "./Questions/DeveloperRelations";
 
 export const DevRelSteps = (formik: FormikProps<any>) => [
   {
-    label: "Objetivo",
-    description: "Objetivo de plataforma e produtos",
+    label: "Objetivos",
+    description: "Objetivos de plataformas e produtos",
     questionsComponent: (
       <Questions
         formik={formik}
-        questions={DevRelStep1}
+        questions={DevRelFormGoals}
         responsesGroup={"goals"}
+      />
+    ),
+  },
+  {
+    label: "Componentes",
+    description: "Componentes",
+    questionsComponent: (
+      <Questions
+        formik={formik}
+        questions={DevRelFormComponents}
+        responsesGroup={"components"}
+      />
+    ),
+  },
+  {
+    label: "Consome",
+    description: "Consome de...",
+    questionsComponent: (
+      <Questions
+        formik={formik}
+        questions={DevRelFormConsume}
+        responsesGroup={"components"}
+      />
+    ),
+  },
+  {
+    label: "Prove",
+    description: "Prove para...",
+    questionsComponent: (
+      <Questions
+        formik={formik}
+        questions={DevRelFormProvide}
+        responsesGroup={"components"}
       />
     ),
   },
