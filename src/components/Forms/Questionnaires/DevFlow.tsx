@@ -1,20 +1,6 @@
 import { FormikProps } from "formik";
-import {
-  EFormIdentifiers,
-  StageFormValues,
-} from "../../../interfaces/interfaces";
 import { Questions } from "../Questions";
-import { DevFlowStep1 } from "../Questions/DevFlow";
-
-export const DevFlowFormInitialValues: Partial<StageFormValues> = {
-  formIdentifier: EFormIdentifiers.PLATFORM_AND_PRODUCTS,
-  responses: {
-    goals: {
-      otherInformation: "",
-      checked: [],
-    },
-  },
-};
+import { DevFlowStep1 } from "./Questions/DevFlow";
 
 export const DevFlowFormSteps = (formik: FormikProps<any>) => [
   {

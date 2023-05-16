@@ -1,6 +1,6 @@
-import { QuestionItem } from "../Questions";
+import { QuestionItem } from "../../Questions";
 
-export const PlatProdFormStep1: QuestionItem[] = [
+export const DevFlowStep1: QuestionItem[] = [
   {
     label:
       "1. Fornecer informações e recursos que apoiem as metas de uma organização em relação à produtividade",

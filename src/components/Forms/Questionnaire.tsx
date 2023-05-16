@@ -67,6 +67,7 @@ export const Questionnaire: React.FC<QuestionnaireProps> = ({
               <VStack
                 p={5}
                 my={10}
+                width={"100%"}
                 align={"start"}
                 borderRadius={"md"}
                 border={"black solid 1px"}

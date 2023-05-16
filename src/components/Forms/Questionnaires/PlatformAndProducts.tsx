@@ -1,30 +1,54 @@
 import { FormikProps } from "formik";
-import { PlatProdFormStep1 } from "../Questions/PlatformAndProducts";
 import { Questions } from "../Questions";
 import {
-  EFormIdentifiers,
-  StageFormValues,
-} from "../../../interfaces/interfaces";
-
-export const PlatProdFormInitialValues: Partial<StageFormValues> = {
-  formIdentifier: EFormIdentifiers.PLATFORM_AND_PRODUCTS,
-  responses: {
-    goals: {
-      otherInformation: "",
-      checked: [],
-    },
-  },
-};
+  PlatProdFormComponents,
+  PlatProdFormConsume,
+  PlatProdFormGoals,
+  PlatProdFormProvide,
+} from "./Questions/PlatformAndProducts";
 
 export const PlatProdFormSteps = (formik: FormikProps<any>) => [
   {
-    label: "Objetivo",
-    description: "Objetivo de plataformas e produtos",
+    label: "Objetivos",
+    description: "Objetivos de plataformas e produtos",
     questionsComponent: (
       <Questions
         formik={formik}
-        questions={PlatProdFormStep1}
+        questions={PlatProdFormGoals}
         responsesGroup={"goals"}
+      />
+    ),
+  },
+  {
+    label: "Componentes",
+    description: "Componentes",
+    questionsComponent: (
+      <Questions
+        formik={formik}
+        questions={PlatProdFormComponents}
+        responsesGroup={"components"}
+      />
+    ),
+  },
+  {
+    label: "Consome",
+    description: "Consome de...",
+    questionsComponent: (
+      <Questions
+        formik={formik}
+        questions={PlatProdFormConsume}
+        responsesGroup={"components"}
+      />
+    ),
+  },
+  {
+    label: "Prove",
+    description: "Prove para...",
+    questionsComponent: (
+      <Questions
+        formik={formik}
+        questions={PlatProdFormProvide}
+        responsesGroup={"components"}
       />
     ),
   },
