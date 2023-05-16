@@ -4,7 +4,7 @@ import {
   TabList,
   TabPanel,
   TabPanels,
-  Tabs,
+  Tabs
 } from "@chakra-ui/react";
 import React, { useContext } from "react";
 import { MdAdminPanelSettings } from "react-icons/md";
@@ -24,7 +24,7 @@ export const AccountDashboard: React.FC = () => {
   return (
     <AuthenticationWrapper>
       <HeaderMenu />
-      <Container maxW={"container.lg"} my={10}>
+      <Container maxW={"container.xl"} my={10} pb={20}>
         <Tabs>
           <TabList>
             <Tab>Minha Conta</Tab>
