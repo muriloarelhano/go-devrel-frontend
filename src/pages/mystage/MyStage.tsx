@@ -119,7 +119,7 @@ export const MyStage: React.FC = () => {
   return (
     <>
       <HeaderMenu />
-      <Container maxW={"container.lg"} mt={10}>
+      <Container maxW={"container.lg"} mt={10} pb={20}>
         {isEmpty(lastStage) ? (
           <Alert status="error">
             <AlertIcon />
@@ -128,7 +128,7 @@ export const MyStage: React.FC = () => {
         ) : (
           <Alert status="success">
             <AlertIcon />
-            Seu ultimo estado foi - {t(`stages.${lastStage}`)}
+            Seu ultimo resultado do formulário foi - {t(`stages.${lastStage}`)}
           </Alert>
         )}
         <Box mb={4} />
@@ -146,7 +146,7 @@ export const MyStage: React.FC = () => {
                 </h2>
                 <AccordionPanel pb={4}>
                   <FormControl>
-                    <FormLabel>Escolha uma ou mais respostas:</FormLabel>
+                    <FormLabel>Escolha apenas uma resposta:</FormLabel>
                     <Controller
                       name={`answers[${index}]`}
                       control={control}

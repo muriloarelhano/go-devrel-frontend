@@ -9,7 +9,7 @@ export function WikiPage() {
   return (
     <>
       <HeaderMenu />
-      <Container maxW="container.2xl">
+      <Container maxW="container.2xl" pb={20}>
         <Wiki items={wikiPageItems} format={"wiki"} />
       </Container>
       <Footer />

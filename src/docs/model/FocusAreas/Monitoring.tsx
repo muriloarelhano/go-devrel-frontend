@@ -4,7 +4,7 @@ import { WikiImage } from "../../../components";
 export const MonitoringModelDoc: React.FC = () => {
   return (
     <>
-      <Heading id="flux">Fluxo de avanço do desenvolvedor</Heading>
+      <Heading id="monitoring">Monitoramento</Heading>
       <Text>
         🔍 Esta área de foco tem como objetivo servir como uma estratégia para
         monitorar o engajamento do desenvolvedor, dando suporte à transparência
