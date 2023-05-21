@@ -13,6 +13,13 @@ export enum EFormIdentifiers {
   DEVELOPER_RELATION = "developer-relation",
 }
 
+export enum EPhasesIds {
+  START = "start-phase",
+  GROWING = "growing-phase",
+  MATURITY = "maturity-phase",
+  CONCLUSION = "conclusion-phase",
+}
+
 export enum ExportFormatTypes {
   CSV = "CSV",
   JSON = "JSON",

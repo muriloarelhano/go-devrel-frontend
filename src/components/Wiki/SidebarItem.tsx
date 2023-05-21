@@ -19,7 +19,6 @@ export interface SidebarItem {
 
 export interface SidebarItemProps {
   item: SidebarItem;
-  setCurrentPageComponent: any;
   setCurrentItemPath: any;
   depthStep?: number;
   depth?: number;
@@ -28,7 +27,6 @@ export interface SidebarItemProps {
 
 export const SidebarItemComponent: React.FC<SidebarItemProps> = ({
   item,
-  setCurrentPageComponent,
   setCurrentItemPath,
   expanded,
   depthStep = 4,
@@ -43,7 +41,6 @@ export const SidebarItemComponent: React.FC<SidebarItemProps> = ({
       if (children) setCollapsed(!collapsed);
 
       setCurrentItemPath(identifier, "children");
-      setCurrentPageComponent(pageContentComponent);
     } else {
       setCollapsed(!collapsed);
     }
@@ -85,7 +82,6 @@ export const SidebarItemComponent: React.FC<SidebarItemProps> = ({
                     depth={depth + 1}
                     depthStep={depthStep}
                     item={subItem}
-                    setCurrentPageComponent={setCurrentPageComponent}
                     setCurrentItemPath={setCurrentItemPath}
                   />
                 )}

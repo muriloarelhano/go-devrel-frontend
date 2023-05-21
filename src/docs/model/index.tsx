@@ -1,4 +1,5 @@
 import { SidebarItem } from "../../components/Wiki/SidebarItem";
+import { EPhasesIds } from "../../interfaces/interfaces";
 import { ConclusionModelDoc } from "./Conclusion";
 import { GrowingPhaseModelDoc } from "./Fases/GrowingPhase";
 import { MaturityPhaseModelDoc } from "./Fases/MaturityPhaseModelDoc";
@@ -44,22 +45,22 @@ export const modelPageItems: SidebarItem[] = [
     pageContentComponent: <PhaseModelDoc />,
   },
   {
-    identifier: "start-phase",
+    identifier: EPhasesIds.START,
     label: "Fase de início",
     pageContentComponent: <StartPhaseModelDoc />,
   },
   {
-    identifier: "growing-phase",
+    identifier: EPhasesIds.GROWING,
     label: "Fase de crescimento",
     pageContentComponent: <GrowingPhaseModelDoc />,
   },
   {
-    identifier: "maturity-phase",
+    identifier: EPhasesIds.MATURITY,
     label: "Fase de maturidade",
     pageContentComponent: <MaturityPhaseModelDoc />,
   },
   {
-    identifier: "conclusion-phase",
+    identifier: EPhasesIds.CONCLUSION,
     label: "Conclusão",
     pageContentComponent: <ConclusionModelDoc />,
   },

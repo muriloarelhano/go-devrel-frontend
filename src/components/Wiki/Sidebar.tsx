@@ -16,7 +16,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
   depthStep,
   depth,
   expanded,
-  setCurrentPageComponent,
   setCurrentItemPath,
 }) => {
   return (
@@ -31,7 +30,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
               depth={depth}
               expanded={expanded}
               item={sidebarItem}
-              setCurrentPageComponent={setCurrentPageComponent}
               setCurrentItemPath={setCurrentItemPath}
             />
           )}
