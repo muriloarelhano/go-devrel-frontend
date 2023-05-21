@@ -1,12 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import "../i18n/i18n";
-import "react-medium-image-zoom/dist/styles.css";
-
 import { useContext, useEffect } from "react";
+import "react-medium-image-zoom/dist/styles.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
+import "../i18n/i18n";
 import { AccountDashboard } from "./account";
-
 import Forms from "./Forms";
 import Home from "./Home";
 import Model from "./Model";

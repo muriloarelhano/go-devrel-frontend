@@ -28,11 +28,12 @@ import {
 import { isEmpty } from "lodash";
 import React, { useEffect, useState } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
-import HeaderMenu from "../../components/Header/Header";
-import { EStages } from "../../interfaces/interfaces";
-import { Answer, questions } from "./questions";
 import { useTranslation } from "react-i18next";
+import HeaderMenu from "../../components/Header/Header";
 import Footer from "../../components/home/Footer";
+import { EStages } from "../../interfaces/interfaces";
+import { findPhaseByStage } from "../../utils/stages";
+import { Answer, questions } from "./questions";
 
 const LAST_STAGE_STORAGE_KEY = "lastMyStageResult";
 
@@ -46,7 +47,7 @@ function calcStageValue(array: Answer[], stage: EStages) {
   return acc;
 }
 
-function checkCurrentState(obj: any) {
+function checkCurrentState(obj: any): any {
   let bigger = 0;
   let stage = "";
 
@@ -62,7 +63,7 @@ function checkCurrentState(obj: any) {
 
 export const MyStage: React.FC = () => {
   const { t } = useTranslation();
-  const [myStageResult, setMyStageResult] = useState<string>("");
+  const [myStageResult, setMyStageResult] = useState<EStages>();
   const [lastStage, setLastStage] = useState<string>(
     localStorage.getItem(LAST_STAGE_STORAGE_KEY) ?? ""
   );
@@ -134,7 +135,7 @@ export const MyStage: React.FC = () => {
         <Box mb={4} />
         <form id="my-stage-form" onSubmit={handleSubmit(onSubmitForm)}>
           {fields.map((field, index) => (
-            <Accordion allowMultiple>
+            <Accordion allowMultiple key={index}>
               <AccordionItem rounded={"lg"} border={"1px solid gray"} mb={6}>
                 <h2>
                   <AccordionButton>
@@ -204,7 +205,11 @@ export const MyStage: React.FC = () => {
             <Button
               colorScheme="blue"
               onClick={() => {
-                window.location.replace("/model");
+                window.location.replace(
+                  `/model?initialPage=${findPhaseByStage(
+                    myStageResult!
+                  )}&initialHeading=${myStageResult}`
+                );
               }}
             >
               Ir para o Modelo
