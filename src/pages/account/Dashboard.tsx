@@ -16,7 +16,7 @@ import { UserRoles } from "../../interfaces/interfaces";
 import { AdminFormsExport } from "./admin/AdminFormsExport";
 import { ChangePassword } from "./ChangePassword";
 import { DeleteAccount } from "./DeleteAccount";
-import { FormsExporting } from "./FormsExporting";
+import { FormsExporting } from "./MyFormsExport";
 import { MyAccount } from "./MyAccount";
 
 export const AccountDashboard: React.FC = () => {
@@ -28,8 +28,8 @@ export const AccountDashboard: React.FC = () => {
         <Tabs>
           <TabList>
             <Tab>Minha Conta</Tab>
-            <Tab>Senha</Tab>
-            <Tab>Exportar Formulários</Tab>
+            <Tab>Mudar Senha</Tab>
+            <Tab>Meus Formulários</Tab>
             {userInfo?.role === UserRoles.Admin && (
               <Tab>
                 <MdAdminPanelSettings
