@@ -3,6 +3,7 @@ import { Step, Steps, useSteps } from "chakra-ui-steps";
 import { FormikProps, useFormik } from "formik";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useCustomToastError } from "../../hooks/useCustomToastError";
 import { StageFormValues } from "../../interfaces/interfaces";
 import { sendFormResponse } from "../../services/formService";
 
@@ -25,6 +26,7 @@ export const Questionnaire: React.FC<QuestionnaireProps> = ({
   prepareSteps,
 }) => {
   const toast = useToast();
+  const customToast = useCustomToastError();
   const [onError, setOnError] = useState(false);
   const { t } = useTranslation();
 
@@ -44,7 +46,18 @@ export const Questionnaire: React.FC<QuestionnaireProps> = ({
   const formik = useFormik({
     initialValues: { stage: formStage, ...formikInitialValues },
     onSubmit: async (values) => {
-      sendFormResponse(values, toast, setOnError);
+      try {
+        await sendFormResponse(values);
+        toast({
+          title: "Formulário enviado com sucesso",
+          status: "success",
+          isClosable: true,
+        });
+        setOnError(false);
+      } catch (error) {
+        customToast(error);
+        setOnError(true);
+      }
     },
   });
 

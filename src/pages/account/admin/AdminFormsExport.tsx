@@ -22,11 +22,13 @@ import {
 import { DateTime } from "luxon";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useCustomToastError } from "../../../hooks/useCustomToastError";
 import { exportAllByDate } from "../../../services/formService";
 import { columns } from "./columns";
 
 export const AdminFormsExport: React.FC = () => {
   const toast = useToast();
+  const customToast = useCustomToastError();
   const [data, setData] = useState([]);
 
   const { register, handleSubmit } = useForm({
@@ -45,14 +47,18 @@ export const AdminFormsExport: React.FC = () => {
   async function onSubmit(data: any) {
     try {
       const forms =
-        (await exportAllByDate(
-          { startDate: data.startDate, endDate: data.endDate },
-          toast
-        )) ?? [];
-      console.log(forms);
+        (await exportAllByDate({
+          startDate: data.startDate,
+          endDate: data.endDate,
+        })) ?? [];
+      toast({
+        title: "Busca efetuada com sucesso",
+        status: "success",
+        isClosable: true,
+      });
       setData(forms);
     } catch (error) {
-      console.error(error);
+      customToast(error);
     }
   }
 
