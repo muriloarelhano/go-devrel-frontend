@@ -1,4 +1,9 @@
 import {
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  AlertTitle,
+  Box,
   Button,
   FormControl,
   FormLabel,
@@ -108,6 +113,18 @@ export const FormsExporting = () => {
           </FormControl>
         </VStack>
       </form>
+      <Alert status="warning" mt={4}>
+        <AlertIcon />
+        <Box>
+          <AlertTitle>
+            Algumas aplicações como Exel não reconhecem a virgula ( , ) como
+            separador do csv.
+          </AlertTitle>
+          <AlertDescription>
+            Abra o arquivo preferencialmente no Libre Office
+          </AlertDescription>
+        </Box>
+      </Alert>
     </>
   );
 };
