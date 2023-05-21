@@ -1,6 +1,9 @@
 import { UseToastOptions } from "@chakra-ui/react";
 import axios from "axios";
-import { ExportFormByDateDto, GetFormsByDateDto } from "../interfaces/forms/api";
+import {
+  ExportFormByDateDto,
+  GetFormsByDateDto,
+} from "../interfaces/forms/api";
 import http from "./axios";
 
 export const sendFormResponse = async (
@@ -35,35 +38,8 @@ export const sendFormResponse = async (
   }
 };
 
-export const exportByDate = async (
-  payload: ExportFormByDateDto,
-  toast: (config: UseToastOptions) => void
-) => {
-  try {
-    const forms = (await http.get("/forms/export", { params: payload })).data;
-    toast({
-      title: "Exportação concluída",
-      status: "success",
-      isClosable: true,
-    });
-    return forms;
-  } catch (error: unknown) {
-    if (axios.isAxiosError(error)) {
-      const errorData = error.response?.data as any;
-      toast({
-        status: "error",
-        description: errorData.description.message,
-        title: `${error.response?.status}`,
-        isClosable: true,
-      });
-    } else {
-      toast({
-        title: "Ocorreu algum problema com sua requisição",
-        status: "error",
-        isClosable: true,
-      });
-    }
-  }
+export const exportByDate = async (payload: ExportFormByDateDto) => {
+  return (await http.get("/forms/export", { params: payload })).data;
 };
 
 export const exportAllByDate = async (
@@ -71,7 +47,8 @@ export const exportAllByDate = async (
   toast: (config: UseToastOptions) => void
 ) => {
   try {
-    const forms = (await http.get("forms/admin/export", { params: payload })).data;
+    const forms = (await http.get("forms/admin/export", { params: payload }))
+      .data;
     toast({
       title: "Busca efetuada com sucesso",
       status: "success",

@@ -7,14 +7,31 @@ import {
   Input,
   Select,
   useToast,
-  VStack
+  VStack,
 } from "@chakra-ui/react";
+import axios from "axios";
 import { saveAs } from "file-saver";
 import { useFormik } from "formik";
 import { DateTime } from "luxon";
 import { ExportFormByDateDto } from "../../interfaces";
 import { ExportFormatTypes } from "../../interfaces/interfaces";
 import { exportByDate } from "../../services/formService";
+
+async function exportForms(values: ExportFormByDateDto, toast: any) {
+  const forms = await exportByDate(values);
+
+  const data =
+    values.format === ExportFormatTypes.JSON ? JSON.stringify(forms) : forms;
+  saveAs(
+    new Blob([data]),
+    `forms_${DateTime.now().toMillis()}.${values.format.toLowerCase()}`
+  );
+  toast({
+    title: "Exportação concluída",
+    status: "success",
+    isClosable: true,
+  });
+}
 
 export const FormsExporting = () => {
   const toast = useToast();
@@ -26,26 +43,31 @@ export const FormsExporting = () => {
       endDate: "",
     },
     onSubmit: async (values: ExportFormByDateDto) => {
-      const forms = await exportByDate(values, toast);
-
-      const data =
-        values.format === ExportFormatTypes.JSON
-          ? JSON.stringify(forms)
-          : forms;
-      saveAs(
-        new Blob([data]),
-        `forms_${DateTime.now().toMillis()}.${values.format.toLowerCase()}`
-      );
+      try {
+        exportForms(values, toast);
+      } catch (error) {
+        if (axios.isAxiosError(error)) {
+          const errorData = error.response?.data as any;
+          toast({
+            status: "error",
+            isClosable: true,
+            title: `${error.response?.status} - Ocorreu um erro com a requisição`,
+            description: errorData.description.message,
+          });
+        }
+      }
     },
   });
 
   return (
     <>
-      <Heading fontSize={"x-large"} mb={8}>Exportar Formulários</Heading>
+      <Heading fontSize={"x-large"} mb={8}>
+        Exportar Formulários
+      </Heading>
       <form onSubmit={formik.handleSubmit}>
         <VStack justify={"start"} align={"start"} maxW={"300px"} gap={4}>
           <FormControl>
-            <FormLabel> Selecione um formato de exportação</FormLabel>
+            <FormLabel>Selecione um formato de exportação</FormLabel>
             <Select
               id="format"
               name="format"
