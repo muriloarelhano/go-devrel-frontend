@@ -1,29 +1,43 @@
 import { Container, Grid, GridItem, Stack } from "@chakra-ui/react";
-import style from "./Custom.module.css";
-import React, { useEffect, useState } from "react";
+import { Prose } from "@nikolovlazar/chakra-ui-prose";
+import React, { useCallback, useEffect, useState } from "react";
 import {
+  getCurrentPathComponent,
   getDeepestChildrenArrayPath,
   getNestedHeadings,
   getNestedPathCurrentItem,
   getPrevNextItem,
 } from "../../utils";
+import style from "./Custom.module.css";
 import { NoContent } from "./NoContent";
 import { Sidebar } from "./Sidebar";
 import { SidebarItem } from "./SidebarItem";
 import { Summary } from "./Summary";
 import { WikiButtons } from "./WikiButtons";
-import { Prose } from "@nikolovlazar/chakra-ui-prose";
 
 export interface WikiProps {
   items: SidebarItem[];
   format: "wiki" | "forms";
+  initialIdentifier?: string;
 }
 
-export const Wiki: React.FC<WikiProps> = ({ items, format }) => {
+function setSummaryHeadings(setNestedHeadings: React.Dispatch<any>) {
+  const headingElements = Array.from(document.querySelectorAll("h2, h3"));
+
+  const newNestedHeadings = getNestedHeadings(headingElements);
+
+  setNestedHeadings(newNestedHeadings);
+}
+
+export const Wiki: React.FC<WikiProps> = ({
+  items,
+  format,
+  initialIdentifier,
+}) => {
   // Complete path to array index of current item on content
   const [currentItemPath, setCurrentItemPath] = useState<number[]>([0]);
 
-  // Page to render on content
+  // Content of current selected page
   const [currentPageComponent, setCurrentPageComponent] = useState<JSX.Element>(
     items[0].pageContentComponent || <NoContent />
   );
@@ -34,16 +48,21 @@ export const Wiki: React.FC<WikiProps> = ({ items, format }) => {
 
   const [nestedHeadings, setNestedHeadings] = useState<any>([]);
 
-  const setPath = (identifier: string, subPathKey: string) => {
-    const temp = getNestedPathCurrentItem(items, subPathKey, identifier) || [];
-    setCurrentItemPath(temp);
-  };
+  const setPath = useCallback(
+    (identifier: string, subPathKey: string) => {
+      const temp =
+        getNestedPathCurrentItem(items, subPathKey, identifier) || [];
+      setCurrentItemPath(temp);
+    },
+    [items]
+  );
 
   useEffect(() => {
-    const headingElements = Array.from(document.querySelectorAll("h2, h3"));
+    setSummaryHeadings(setNestedHeadings);
 
-    const newNestedHeadings = getNestedHeadings(headingElements);
-    setNestedHeadings(newNestedHeadings);
+    setCurrentPageComponent(
+      getCurrentPathComponent(items, currentItemPath).pageContentComponent!
+    );
 
     if (format === "wiki") {
       if (currentItemPath.length > 1) {
@@ -55,6 +74,7 @@ export const Wiki: React.FC<WikiProps> = ({ items, format }) => {
           currentItemsArray,
           currentItemPath[currentItemPath.length - 1]
         );
+
         setPreviousItem(prev);
         setNextItem(next);
       } else {
@@ -64,6 +84,10 @@ export const Wiki: React.FC<WikiProps> = ({ items, format }) => {
       }
     }
   }, [currentItemPath, items, format]);
+
+  useEffect(() => {
+    if (initialIdentifier) setPath(initialIdentifier, "children");
+  }, [initialIdentifier, setPath]);
 
   return (
     <Container maxW={"80vw"}>

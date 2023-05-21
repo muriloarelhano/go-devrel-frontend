@@ -66,7 +66,7 @@ export const MyAccount: React.FC = () => {
 
   return (
     <VStack maxW={"container.sm"} align={"start"} gap={8}>
-      <Heading fontSize={"x-large"}>Dados da conta</Heading>
+      <Heading fontSize={"x-large"}>Dados da Conta</Heading>
       <form onSubmit={formik.handleSubmit}>
         <Grid
           gridGap={8}

@@ -1,5 +1,23 @@
 import { SidebarItem } from "../components/Wiki/SidebarItem";
 
+export function getCurrentPathComponent(
+  items: SidebarItem[],
+  path: number[]
+): SidebarItem {
+  let item;
+  let index = 0;
+
+  if (items[path[index]].hasOwnProperty("children") && path.length > 1) {
+    item = getCurrentPathComponent(items[path[index]].children!, [
+      path[++index],
+    ]);
+  } else {
+    item = items[path[index]];
+  }
+
+  return item;
+}
+
 export function getNestedPathCurrentItem(
   arr: SidebarItem[],
   subPathKey: string,

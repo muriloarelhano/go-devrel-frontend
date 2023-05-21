@@ -1,7 +1,7 @@
 import { useToast } from "@chakra-ui/react";
 import axios from "axios";
-import { useState, useEffect } from "react";
-import { ErrosEnum } from "../utils/errors";
+import { useState } from "react";
+import { UserInfo } from "../interfaces/interfaces";
 import { LoginInterface } from "../interfaces/login";
 import http from "../services/axios";
 import {
@@ -9,7 +9,7 @@ import {
   setTokensOnStorage,
   unsetTokensFromStorage,
 } from "../utils/authTokens";
-import { UserInfo } from "../interfaces/interfaces";
+import { EResponseErrorCodes } from "../utils/errors";
 
 export function useAuth() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -17,30 +17,13 @@ export function useAuth() {
   const [loading, setLoading] = useState(true);
   const toast = useToast();
 
-  useEffect(() => {
-    const { idToken, refreshToken } = getTokensFromStorage();
-
-    if (idToken) {
-      http.interceptors.request.use((config) => {
-        config.headers!["Authorization"] = `Bearer ${idToken}`;
-        return config;
-      });
-      setAuthenticated(true);
-    }
-    if (!refreshToken) {
-      console.error("refresh_token is missing");
-    }
-
-    setLoading(false);
-  }, []);
-
   async function handleLogin(payload: LoginInterface): Promise<void> {
     try {
       const {
         data: { id_token, refresh_token },
       } = await http.get("/auth/login", { params: { ...payload } });
       setTokensOnStorage(id_token, refresh_token);
-      http.interceptors.request.use((config) => {
+      http.interceptors.request.use((config: any) => {
         config.headers!["Authorization"] = `Bearer ${id_token}`;
         return config;
       });
@@ -55,16 +38,15 @@ export function useAuth() {
       });
     } catch (err: any) {
       let errorMessage = "Ocorreu um erro ao realizar o login";
-      http.interceptors.request.use((config) => {
+      http.interceptors.request.use((config: any) => {
         //@ts-ignore
         config.headers!["Authorization"] = undefined;
         return config;
       });
       if (axios.isAxiosError(err)) {
         if (
-          ErrosEnum.ERROR_INVALID_CREDENTIALS ===
-          //@ts-ignore
-          err.response.data.description.message
+          EResponseErrorCodes.ERROR_INVALID_CREDENTIALS ===
+          (err.response?.data as any).description.message
         )
           errorMessage = "Credenciais inválidas";
       }
@@ -144,5 +126,7 @@ export function useAuth() {
     handleLogout,
     refresh,
     handleDeleteAccount,
+    setAuthenticated,
+    setLoading,
   };
 }
