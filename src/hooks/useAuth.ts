@@ -1,6 +1,6 @@
 import { useToast } from "@chakra-ui/react";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { UserInfo } from "../interfaces/interfaces";
 import { LoginInterface } from "../interfaces/login";
 import http from "../services/axios";
@@ -16,25 +16,6 @@ export function useAuth() {
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
   const [loading, setLoading] = useState(true);
   const toast = useToast();
-
-  useEffect(() => {
-    const { idToken, refreshToken } = getTokensFromStorage();
-
-    if (idToken) {
-      http.interceptors.request.use((config: any) => {
-        config.headers!["Authorization"] = `Bearer ${
-          getTokensFromStorage().idToken
-        }`;
-        return config;
-      });
-      setAuthenticated(true);
-    }
-    if (!refreshToken) {
-      console.error("refresh_token is missing");
-    }
-
-    setLoading(false);
-  }, [authenticated, userInfo]);
 
   async function handleLogin(payload: LoginInterface): Promise<void> {
     try {
@@ -145,5 +126,7 @@ export function useAuth() {
     handleLogout,
     refresh,
     handleDeleteAccount,
+    setAuthenticated,
+    setLoading,
   };
 }
