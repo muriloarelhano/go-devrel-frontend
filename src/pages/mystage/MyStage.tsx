@@ -206,9 +206,7 @@ export const MyStage: React.FC = () => {
               colorScheme="blue"
               onClick={() => {
                 window.location.replace(
-                  `/model?initialPage=${findPhaseByStage(
-                    myStageResult!
-                  )}&initialHeading=${myStageResult}`
+                  `/model?initialPage=${findPhaseByStage(myStageResult!)}`
                 );
               }}
             >

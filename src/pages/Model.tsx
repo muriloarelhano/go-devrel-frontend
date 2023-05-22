@@ -9,17 +9,15 @@ import { modelPageItems } from "../docs/model";
 function Model() {
   let [searchParams] = useSearchParams();
   const initialPage = searchParams.get("initialPage");
-  const initialHeading = searchParams.get("initialHeading");
-  console.log(initialPage, initialHeading);
+
   return (
     <>
       <HeaderMenu />
       <Container maxW="container.2xl " pb={20}>
         <Wiki
-          items={modelPageItems}
           format={"wiki"}
+          items={modelPageItems}
           initialPage={initialPage ?? undefined}
-          initialHeading={initialHeading ?? undefined}
         />
       </Container>
       <Footer />

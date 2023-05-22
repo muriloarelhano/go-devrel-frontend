@@ -4,7 +4,7 @@ import { WikiImage } from "../../../components";
 export const DevFlowDoc: React.FC = () => {
   return (
     <>
-      <Heading id="flux">Fluxo de avanço do desenvolvedor</Heading>
+      <Heading id="dev-flow">Fluxo de avanço do desenvolvedor</Heading>
       <Text>
         🔍 Esta área de foco tem como objetivo apoiar no acompanhamento e
         análise do avanço dos desenvolvedores dentro do ecossistema. Entender

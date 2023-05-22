@@ -1,10 +1,11 @@
 import { Heading, ListItem, Text, UnorderedList } from "@chakra-ui/react";
 import React from "react";
 import { Lessons } from "../../../components/Wiki/Lessons";
+import { EPhasesIds, EStages } from "../../../interfaces/interfaces";
 export const StartPhaseModelDoc: React.FC = () => {
   return (
     <>
-      <Heading id="flux">Fase de início</Heading>
+      <Heading id={EPhasesIds.START}>Fase de início</Heading>
       <Text>
         🔍 Nesta fase, o desenvolvedor aprende sobre a cultura, costumes e
         realidades do ecossistema. É a fase da decisão em participar do
@@ -17,7 +18,7 @@ export const StartPhaseModelDoc: React.FC = () => {
         Sensibilização e Entrada. A fase de início envolve o trabalho de
         evangelismo pelos profissionais de DevRel.
       </Text>
-      <Heading id="sens">Estágio de sensibilização</Heading>
+      <Heading id={EStages.AWARENESS}>Estágio de sensibilização</Heading>
       <Text>
         Neste estágio, a organização central, por meio de sua equipe de DevRel,
         deve mostrar ao desenvolvedor que o ecossistema é atrativo para as
@@ -147,7 +148,7 @@ export const StartPhaseModelDoc: React.FC = () => {
         </UnorderedList>
       </Lessons>
 
-      <Heading id="start">Estágio de entrada</Heading>
+      <Heading id={EStages.BEGINNING}>Estágio de entrada</Heading>
       <Text>
         Este estágio está relacionado ao objetivo do desenvolvedor de gerar
         alguma contribuição para o ecossistema ou para sua carreira
