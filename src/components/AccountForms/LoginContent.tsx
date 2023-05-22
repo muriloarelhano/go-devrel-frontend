@@ -9,7 +9,7 @@ import {
   ModalFooter,
   ModalHeader,
   Text,
-  useDisclosure,
+  useDisclosure
 } from "@chakra-ui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useContext, useState } from "react";
@@ -41,7 +41,7 @@ const LoginContent: React.FC<{ onClose: any; goToSignIn: () => void }> = ({
     register,
     formState: { errors },
   } = useForm<LoginInterface>({
-    mode: "onBlur",
+    mode: "all",
     resolver: yupResolver(schema),
   });
 

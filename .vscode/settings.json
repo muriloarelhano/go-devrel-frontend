@@ -3,5 +3,8 @@
         "src/i18n",
         "src/i18n/locales"
     ],
-    "typescript.tsdk": "node_modules\\typescript\\lib"
+    "typescript.tsdk": "node_modules\\typescript\\lib",
+    "cSpell.words": [
+        "encontrado"
+    ]
 }

@@ -1,16 +1,17 @@
 import { Heading, Text } from "@chakra-ui/react";
 import React from "react";
+import { EPhasesIds, EStages } from "../../../interfaces/interfaces";
 export const GrowingPhaseModelDoc: React.FC = () => {
   return (
     <>
-      <Heading id="flux">Fase de crescimento</Heading>
+      <Heading id={EPhasesIds.GROWING}>Fase de crescimento</Heading>
       <Text>
         🔍 Nesta fase o desenvolvedor deve ter a sua disposição os recursos
         necessários para avançar na aquisição de conhecimento teórico e prático
         para gerar contribuições para a expansão do ecossistema. Como parte
         desta fase foram identificados dois estágios: Ativação e Retenção.
       </Text>
-      <Heading id="sens">Estágio de ativação</Heading>
+      <Heading id={EStages.ACTIVATE}>Estágio de ativação</Heading>
       <Text>
         Este estágio funciona como um gatilho que indica se o desenvolvedor
         gerou sua primeira contribuição para o ecossistema, por exemplo, por
@@ -25,7 +26,7 @@ export const GrowingPhaseModelDoc: React.FC = () => {
         plataforma; Apoiar contribuições de nicho; Apoiar o desenvolvimento; e
         Analisar os desenvolvedores periféricos, ativos e de topo.
       </Text>
-      <Heading id="start">Estágio de retenção</Heading>
+      <Heading id={EStages.RETENTION}>Estágio de retenção</Heading>
       <Text>
         Neste estágio um desenvolvedor continua a usar a plataforma, bem como
         recursos novos/adicionais e fornece novas contribuições. Porém o
@@ -45,7 +46,6 @@ export const GrowingPhaseModelDoc: React.FC = () => {
         ecossistema; Apoiar o desenvolvimento; e Analisar os desenvolvedores
         periféricos, ativos e de topo.
       </Text>
-      
     </>
   );
 };

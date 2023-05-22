@@ -1,8 +1,10 @@
 import { Button } from "@chakra-ui/react";
 import { createColumnHelper } from "@tanstack/react-table";
 import { saveAs } from "file-saver";
+import { t } from "i18next";
 import { DateTime } from "luxon";
 import { FaDownload } from "react-icons/fa";
+
 const columnHelper = createColumnHelper<any>();
 
 const download = (form: any) => {
@@ -16,13 +18,17 @@ export const columns = [
     header: `User ID`,
     cell: (info) => info.getValue(),
   }),
+  columnHelper.accessor(`email`, {
+    header: `E-mail`,
+    cell: (info) => info.getValue(),
+  }),
   columnHelper.accessor(`formIdentifier`, {
     header: `Identificador`,
-    cell: (info) => info.getValue(),
+    cell: (info) => t("forms." + info.getValue()),
   }),
   columnHelper.accessor(`stage`, {
     header: `Estágio`,
-    cell: (info) => info.getValue(),
+    cell: (info) => t("stages." + info.getValue()),
   }),
   columnHelper.accessor(`createdAt`, {
     header: "Criado em",
@@ -33,7 +39,12 @@ export const columns = [
     id: "actions",
     header: "Ações",
     cell: (props) => (
-      <Button size={"sm"} colorScheme={"green"} leftIcon={<FaDownload />} onClick={() => download(props.row.original)}>
+      <Button
+        size={"sm"}
+        colorScheme={"green"}
+        leftIcon={<FaDownload />}
+        onClick={() => download(props.row.original)}
+      >
         Baixar
       </Button>
     ),

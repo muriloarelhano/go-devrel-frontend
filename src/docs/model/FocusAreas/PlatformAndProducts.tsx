@@ -4,7 +4,7 @@ import { WikiImage } from "../../../components";
 export const PlatformAndProductsDoc = () => {
   return (
     <>
-      <Heading>Plataforma e produtos</Heading>
+      <Heading id="platform-and-products">Plataforma e produtos</Heading>
       <Text>
         🔍 Esta área de foco tem como objetivo fornecer informações e recursos
         que apoiem as metas de uma organização em relação à produtividade,

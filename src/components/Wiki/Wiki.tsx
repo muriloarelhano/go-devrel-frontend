@@ -18,10 +18,12 @@ import { WikiButtons } from "./WikiButtons";
 export interface WikiProps {
   items: SidebarItem[];
   format: "wiki" | "forms";
-  initialIdentifier?: string;
+  initialPage?: string;
 }
 
 function setSummaryHeadings(setNestedHeadings: React.Dispatch<any>) {
+  console.log("setting summary headings");
+
   const headingElements = Array.from(document.querySelectorAll("h2, h3"));
 
   const newNestedHeadings = getNestedHeadings(headingElements);
@@ -29,11 +31,7 @@ function setSummaryHeadings(setNestedHeadings: React.Dispatch<any>) {
   setNestedHeadings(newNestedHeadings);
 }
 
-export const Wiki: React.FC<WikiProps> = ({
-  items,
-  format,
-  initialIdentifier,
-}) => {
+export const Wiki: React.FC<WikiProps> = ({ items, format, initialPage }) => {
   // Complete path to array index of current item on content
   const [currentItemPath, setCurrentItemPath] = useState<number[]>([0]);
 
@@ -58,8 +56,6 @@ export const Wiki: React.FC<WikiProps> = ({
   );
 
   useEffect(() => {
-    setSummaryHeadings(setNestedHeadings);
-
     setCurrentPageComponent(
       getCurrentPathComponent(items, currentItemPath).pageContentComponent!
     );
@@ -86,8 +82,12 @@ export const Wiki: React.FC<WikiProps> = ({
   }, [currentItemPath, items, format]);
 
   useEffect(() => {
-    if (initialIdentifier) setPath(initialIdentifier, "children");
-  }, [initialIdentifier, setPath]);
+    if (initialPage) setPath(initialPage, "children");
+  }, [initialPage, setPath]);
+
+  useEffect(() => {
+    setSummaryHeadings(setNestedHeadings);
+  }, [currentPageComponent]);
 
   return (
     <Container maxW={"80vw"}>

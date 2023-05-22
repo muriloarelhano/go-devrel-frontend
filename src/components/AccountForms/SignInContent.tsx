@@ -7,7 +7,7 @@ import {
   Input,
   ModalBody,
   ModalFooter,
-  useToast,
+  useToast
 } from "@chakra-ui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
@@ -39,9 +39,9 @@ const SignInContent: React.FC = () => {
 
   const {
     register,
-    formState: { errors, isSubmitting, isValid },
+    formState: { errors, isValid, isSubmitting },
   } = useForm<CreateUser>({
-    mode: "onBlur",
+    mode: "all",
     resolver: yupResolver(schema),
   });
 

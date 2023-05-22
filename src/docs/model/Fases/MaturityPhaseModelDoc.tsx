@@ -1,9 +1,10 @@
 import { Heading, Text } from "@chakra-ui/react";
 import React from "react";
+import { EPhasesIds, EStages } from "../../../interfaces/interfaces";
 export const MaturityPhaseModelDoc: React.FC = () => {
   return (
     <>
-      <Heading id="flux">Fase de maturidade</Heading>
+      <Heading id={EPhasesIds.MATURITY}>Fase de maturidade</Heading>
       <Text>
         🔍 Nesta fase o desenvolvedor precisa se manter atualizado, compartilhar
         experiências, estabelecer confiança com a organização central e a
@@ -19,7 +20,7 @@ export const MaturityPhaseModelDoc: React.FC = () => {
         que ajuda a identificar e preparar desenvolvedores que são referência
         para o ecossistema (Estágio de referência), como segue.
       </Text>
-      <Heading id="sens">Estágio de reconhecimento</Heading>
+      <Heading id={EStages.RECOGNITION}>Estágio de reconhecimento</Heading>
       <Text>
         Uma organização deve perceber e destacar dentro do ecossistema seus
         melhores desenvolvedores em aspectos que demonstrem contribuições
@@ -44,7 +45,7 @@ export const MaturityPhaseModelDoc: React.FC = () => {
         Construir e obter feedback sobre os produtos; Comunicar os impactos
         reais do trabalho dos desenvolvedores.
       </Text>
-      <Heading id="start">Estágio de referência</Heading>
+      <Heading id={EStages.REFERENCE}>Estágio de referência</Heading>
       <Text>
         Neste estágio o foco é fazer com que um desenvolvedor, identificado como
         líder no estágio anterior, seja capacitado para influenciar a comunidade

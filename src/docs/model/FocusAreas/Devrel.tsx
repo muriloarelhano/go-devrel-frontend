@@ -1,10 +1,10 @@
-import React from "react";
 import { Heading, Text } from "@chakra-ui/react";
+import React from "react";
 import { WikiImage } from "../../../components";
 export const DevrelDoc = () => {
   return (
     <>
-      <Heading>Devrel (Evangelismo e advocacia) </Heading>
+      <Heading id="dev-rel">Devrel (Evangelismo e advocacia) </Heading>
       <Text>
         🔍 Esta área de foco tem como objetivo ajudar a incorporar contribuições
         com potencial (ou seja, produtos complementares, serviços e inovações)
