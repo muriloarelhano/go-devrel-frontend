@@ -7,6 +7,12 @@
             "retention": "Retenção",
             "recognition": "Reconhecimento",
             "reference": "Referência"
+        },
+        "forms": {
+            "platform-and-products": "Plataforma e produtos",
+            "developer-flow": "Fluxo do desenvolvedor",
+            "monitoring": "Monitoramento",
+            "dev-rel": "Developer Relations"
         }
     }
 }
