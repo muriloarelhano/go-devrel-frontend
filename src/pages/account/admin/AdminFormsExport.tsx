@@ -24,6 +24,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useCustomToastError } from "../../../hooks/useCustomToastError";
 import { exportAllByDate } from "../../../services/formService";
+import { getManyUsersByIds } from "../../../services/userService";
 import { columns } from "./columns";
 
 export const AdminFormsExport: React.FC = () => {
@@ -51,6 +52,19 @@ export const AdminFormsExport: React.FC = () => {
           startDate: data.startDate,
           endDate: data.endDate,
         })) ?? [];
+
+      const users = await getManyUsersByIds(
+        forms.map((form: any) => form.userId)
+      );
+
+      for (const key in forms) {
+        forms[key].email =
+          users.find((user: any) => user.id === forms[key].userId)?.email ??
+          "Não encontrado";
+      }
+
+      console.log(forms, users);
+
       toast({
         title: "Busca efetuada com sucesso",
         status: "success",

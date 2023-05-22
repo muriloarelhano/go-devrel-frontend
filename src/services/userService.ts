@@ -40,6 +40,19 @@ export async function deleteUser() {
   }
 }
 
+export async function getManyUsersByIds(ids: string[]) {
+  try {
+    return (
+      await http.post("/user/admin/get-by-ids", {
+        ids,
+      })
+    ).data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
 export async function resetPassword(data: {
   password: string;
   newPassword: string;

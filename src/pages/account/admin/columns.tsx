@@ -18,6 +18,10 @@ export const columns = [
     header: `User ID`,
     cell: (info) => info.getValue(),
   }),
+  columnHelper.accessor(`email`, {
+    header: `E-mail`,
+    cell: (info) => info.getValue(),
+  }),
   columnHelper.accessor(`formIdentifier`, {
     header: `Identificador`,
     cell: (info) => t("forms." + info.getValue()),
