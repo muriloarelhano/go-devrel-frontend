@@ -5,6 +5,7 @@ import {
   FormLabel,
   Heading,
   Input,
+  Text,
   useToast,
   VStack,
 } from "@chakra-ui/react";
@@ -38,7 +39,8 @@ export const ChangePassword = () => {
             isClosable: true,
             status: "error",
             title: "Erro ao alterar a senha",
-            description: (error.response?.data as any).description.message,
+            description: (error.response?.data as any).description.message.map((error: string) => (<Text>{error}</Text>)),
+
           });
         }
       }
@@ -49,7 +51,7 @@ export const ChangePassword = () => {
     <form onSubmit={formik.handleSubmit}>
       <VStack align={"flex-start"} gap={8} maxW={"xs"}>
         <Heading fontSize={"x-large"}>Mudar Senha</Heading>
-        <FormControl>
+        <FormControl isInvalid={!!formik.errors.password}>
           <FormLabel>Senha Antiga</FormLabel>
           <Input
             id="password"
@@ -58,8 +60,9 @@ export const ChangePassword = () => {
             onChange={formik.handleChange}
             value={formik.values.password}
           />
+          <FormErrorMessage>{formik.errors.password}</FormErrorMessage>
         </FormControl>
-        <FormControl>
+        <FormControl isInvalid={!!formik.errors.newPassword}>
           <FormLabel>Nova Senha</FormLabel>
           <Input
             id="newPassword"

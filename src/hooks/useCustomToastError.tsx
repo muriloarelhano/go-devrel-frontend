@@ -6,7 +6,7 @@ export function useCustomToastError() {
   const toast = useToast();
 
   return (error: any) => {
-    const title = `${error.response?.status} - Ocorreu um erro com a requisição`;
+    const title = `Ocorreu um erro com a requisição`;
     toast({
       title,
       status: "error",
@@ -14,8 +14,8 @@ export function useCustomToastError() {
       description: axios.isAxiosError(error)
         ? isArray((error.response?.data as any).description.message)
           ? (error.response?.data as any).description.message.map(
-              (message: string) => <Text>{message}</Text>
-            )
+            (message: string) => <Text>{message}</Text>
+          )
           : (error.response?.data as any).description.message
         : error.description.message,
     });
