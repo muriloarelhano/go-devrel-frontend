@@ -12,10 +12,11 @@ import {
 import { EResponseErrorCodes } from "../utils/errors";
 
 export function useAuth() {
+  const toast = useToast();
+
   const [authenticated, setAuthenticated] = useState(false);
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
   const [loading, setLoading] = useState(true);
-  const toast = useToast();
 
   async function handleLogin(payload: LoginInterface): Promise<void> {
     try {
@@ -26,7 +27,7 @@ export function useAuth() {
       toast({
         title: "Usuário logado com sucesso",
         status: "success",
-        duration: 9000,
+        duration: 8000,
         isClosable: true,
       });
     } catch (err: any) {
@@ -42,24 +43,12 @@ export function useAuth() {
       toast({
         title: errorMessage,
         status: "error",
-        duration: 9000,
+        duration: 8000,
         isClosable: true,
       });
       handleLogout(false);
       throw err;
     }
-  }
-
-  function handleLogout(shouldRefresh = true): void {
-    setAuthenticated(false);
-    unsetTokensFromStorage();
-    http.interceptors.request.use((config) => {
-      //@ts-ignore
-      config.headers["Authorization"] = undefined;
-      return config;
-    });
-    setUserInfo(null);
-    shouldRefresh ?? window.location.replace("/");
   }
 
   async function refresh() {
@@ -77,20 +66,17 @@ export function useAuth() {
         ).data;
         setupAuthenticatedUser(id_token, refresh_token);
       } catch (error) {
-        if (axios.isAxiosError(error)) {
-          toast({
-            //@ts-ignore
-            title: error.response?.data,
-            status: "error",
-            duration: 9000,
-            isClosable: true,
-          });
-        }
+        console.error(error);
+        toast({
+          title: "O usuário foi deslogado da sessão",
+          status: "error",
+          description: "Ocorreu um erro ao revalidar a sessão do usuário",
+          duration: 8000,
+          isClosable: true,
+        });
       }
     } else {
-      unsetTokensFromStorage();
-      setUserInfo(null);
-      setAuthenticated(false);
+      handleLogout(false);
     }
   }
 
@@ -99,6 +85,20 @@ export function useAuth() {
     setUserInfo(null);
     setAuthenticated(false);
     window.location.replace("/");
+  }
+
+  function handleLogout(shouldRefresh = true): void {
+    http.interceptors.request.use((config) => {
+      if (config.headers!["Authorization"]) {
+        delete config.headers!["Authorization"];
+      }
+
+      return config;
+    });
+    setAuthenticated(false);
+    unsetTokensFromStorage();
+    setUserInfo(null);
+    shouldRefresh ?? window.location.replace("/");
   }
 
   function setupAuthenticatedUser(id_token: any, refresh_token: any) {

@@ -44,7 +44,7 @@ export const AuthProvider: React.FC = ({ children }) => {
       setAuthenticated(true);
     }
     if (!refreshToken) {
-      console.error("refresh_token is missing");
+      console.warn("refresh_token is missing");
     }
 
     setLoading(false);
