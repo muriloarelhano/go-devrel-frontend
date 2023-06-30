@@ -67,6 +67,7 @@ export function useAuth() {
         setupAuthenticatedUser(id_token, refresh_token);
       } catch (error) {
         console.error(error);
+        unsetTokensFromStorage();
         toast({
           title: "O usuário foi deslogado da sessão",
           status: "error",
