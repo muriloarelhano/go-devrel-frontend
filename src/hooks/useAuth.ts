@@ -22,14 +22,7 @@ export function useAuth() {
       const {
         data: { id_token, refresh_token },
       } = await http.get("/auth/login", { params: { ...payload } });
-      setTokensOnStorage(id_token, refresh_token);
-      http.interceptors.request.use((config: any) => {
-        config.headers!["Authorization"] = `Bearer ${id_token}`;
-        return config;
-      });
-      setUserInfo(JSON.parse(atob(id_token.split(".")[1])));
-      setAuthenticated(true);
-
+      setupAuthenticatedUser(id_token, refresh_token);
       toast({
         title: "Usuário logado com sucesso",
         status: "success",
@@ -37,12 +30,8 @@ export function useAuth() {
         isClosable: true,
       });
     } catch (err: any) {
+      console.error(err);
       let errorMessage = "Ocorreu um erro ao realizar o login";
-      http.interceptors.request.use((config: any) => {
-        //@ts-ignore
-        config.headers!["Authorization"] = undefined;
-        return config;
-      });
       if (axios.isAxiosError(err)) {
         if (
           EResponseErrorCodes.ERROR_INVALID_CREDENTIALS ===
@@ -50,18 +39,18 @@ export function useAuth() {
         )
           errorMessage = "Credenciais inválidas";
       }
-      setAuthenticated(false);
       toast({
         title: errorMessage,
         status: "error",
         duration: 9000,
         isClosable: true,
       });
+      handleLogout(false);
       throw err;
     }
   }
 
-  function handleLogout(): void {
+  function handleLogout(shouldRefresh = true): void {
     setAuthenticated(false);
     unsetTokensFromStorage();
     http.interceptors.request.use((config) => {
@@ -70,7 +59,7 @@ export function useAuth() {
       return config;
     });
     setUserInfo(null);
-    window.location.replace("/");
+    shouldRefresh ?? window.location.replace("/");
   }
 
   async function refresh() {
@@ -86,13 +75,7 @@ export function useAuth() {
             },
           })
         ).data;
-        setTokensOnStorage(id_token, refresh_token);
-        http.interceptors.request.use((config) => {
-          config.headers!["Authorization"] = `Bearer ${id_token}`;
-          return config;
-        });
-        setUserInfo(JSON.parse(atob(id_token.split(".")[1])));
-        setAuthenticated(true);
+        setupAuthenticatedUser(id_token, refresh_token);
       } catch (error) {
         if (axios.isAxiosError(error)) {
           toast({
@@ -116,6 +99,16 @@ export function useAuth() {
     setUserInfo(null);
     setAuthenticated(false);
     window.location.replace("/");
+  }
+
+  function setupAuthenticatedUser(id_token: any, refresh_token: any) {
+    setTokensOnStorage(id_token, refresh_token);
+    http.interceptors.request.use((config) => {
+      config.headers!["Authorization"] = `Bearer ${id_token}`;
+      return config;
+    });
+    setUserInfo(JSON.parse(atob(id_token.split(".")[1])));
+    setAuthenticated(true);
   }
 
   return {

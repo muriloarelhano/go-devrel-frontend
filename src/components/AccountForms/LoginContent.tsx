@@ -28,9 +28,10 @@ const LoginContent: React.FC<{ onClose: any; goToSignIn: () => void }> = ({
   onClose,
   goToSignIn,
 }) => {
+  const { handleLogin } = useContext(AuthContext);
+  
   const [values, setValues] = useState<LoginInterface>();
   const [loading, setLoading] = useState<boolean>(false);
-  const { handleLogin } = useContext(AuthContext);
   const { isOpen, onClose: onCloseResetPass, onOpen } = useDisclosure();
 
   const onClickResetPassword = () => {
