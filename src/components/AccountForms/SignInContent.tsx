@@ -36,6 +36,8 @@ const schema = yup.object().shape({
 const SignInContent: React.FC = () => {
   const [values, setValues] = useState<CreateUser>();
   const toast = useToast();
+  const [loading, setLoading] = useState<boolean>(false);
+
 
   const {
     register,
@@ -49,13 +51,16 @@ const SignInContent: React.FC = () => {
     event.preventDefault();
 
     try {
+      setLoading(true)
       await createUser(values!);
       toast({
         status: "success",
         title: "Usuário cadastrado com sucesso.",
       });
       window.location.reload();
+      setLoading(false)
     } catch (error: any) {
+      setLoading(false)
       if (axios.isAxiosError(error)) {
         toast({
           status: "error",
@@ -63,10 +68,11 @@ const SignInContent: React.FC = () => {
           //@ts-ignore
           description: error.response?.data!.message
             ? //@ts-ignore
-              error.response?.data.message
+            error.response?.data.message
             : "",
         });
       } else {
+        setLoading(false)
         toast({
           status: "error",
           title: "Erro ao cadastrar o usuário.",
@@ -166,7 +172,7 @@ const SignInContent: React.FC = () => {
           width="full"
           colorScheme="teal"
           type="submit"
-          disabled={isSubmitting || !isValid}
+          disabled={isSubmitting || !isValid || loading}
         >
           Cadastrar
         </Button>
