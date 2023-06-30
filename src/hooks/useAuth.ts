@@ -20,9 +20,11 @@ export function useAuth() {
 
   async function handleLogin(payload: LoginInterface): Promise<void> {
     try {
-      const {
-        data: { id_token, refresh_token },
-      } = await http.get("/auth/login", { params: { ...payload } });
+      const { id_token, refresh_token } = (
+        await http.get("/auth/login", {
+          params: { ...payload },
+        })
+      ).data;
       setupAuthenticatedUser(id_token, refresh_token);
       toast({
         title: "Usuário logado com sucesso",
@@ -89,27 +91,22 @@ export function useAuth() {
   }
 
   function handleLogout(shouldRefresh = true): void {
-    http.interceptors.request.use((config) => {
-      if (config.headers!["Authorization"]) {
-        delete config.headers!["Authorization"];
-      }
-
-      return config;
-    });
+    http.defaults.headers.common["Authorization"] = "";
     setAuthenticated(false);
     unsetTokensFromStorage();
     setUserInfo(null);
-    shouldRefresh ?? window.location.replace("/");
+    if (shouldRefresh) window.location.replace("/");
   }
 
   function setupAuthenticatedUser(id_token: any, refresh_token: any) {
-    setTokensOnStorage(id_token, refresh_token);
-    http.interceptors.request.use((config) => {
-      config.headers!["Authorization"] = `Bearer ${id_token}`;
-      return config;
-    });
-    setUserInfo(JSON.parse(atob(id_token.split(".")[1])));
-    setAuthenticated(true);
+    try {
+      http.defaults.headers.common["Authorization"] = `Bearer ${id_token}`;
+      setTokensOnStorage(id_token, refresh_token);
+      setUserInfo(JSON.parse(atob(id_token.split(".")[1])));
+      setAuthenticated(true);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return {
